@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { ScrollView } from "react-native";
 
 import styled from "styled-components/native";
 import { Drill } from "./SampleDrills";
@@ -15,14 +16,13 @@ export const TabataDisplay: FunctionComponent<TabataDisplayInterface> = ({
 }) => {
   return (
     <Container>
-      <Left>
+      <Top>
         <TabataEngine drill={drill} />
-      </Left>
-      <Right>
-        <ScollContainer>
-          <TabataQueue drill={drill} />
-        </ScollContainer>
-      </Right>
+      </Top>
+
+      <Bottom>
+        <TabataQueue drill={drill} />
+      </Bottom>
     </Container>
   );
 };
@@ -34,17 +34,9 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const ScollContainer = styled.View`
-  position: absolute;
-  width: 100%;
-`;
-
-const Left = styled.View`
+const Top = styled.View`
   flex: 1;
 `;
-const Right = styled.View`
+const Bottom = styled(ScrollView)`
   flex: 1;
-  position: relative;
-
-  min-height: 400px;
 `;

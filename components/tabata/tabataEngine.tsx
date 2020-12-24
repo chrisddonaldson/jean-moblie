@@ -136,7 +136,6 @@ const Exercise = styled.Text`
   color: white;
   font-size: 32px;
   text-align: center;
-  max-width: 300px;
 `;
 
 interface ContainerI {
@@ -151,7 +150,7 @@ const Container = styled.View<ContainerI>`
 `;
 
 const Top = styled.View`
-  flex: 10;
+  flex: 6;
 `;
 const Bottom = styled.View`
   flex: 1;
