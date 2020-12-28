@@ -5,6 +5,7 @@ import { Button, StyleSheet, TextInput } from "react-native";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import Login from "react-native-login-keycloak";
+import BackgroundEnvironment from "../components/BackgroundEnvironment";
 const checkIfTokensAreOnDevice = async () => {
   Login.getTokens()
     .then((res: any) => console.log(res))
@@ -33,7 +34,7 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <BackgroundEnvironment style={styles.container}>
       <Text style={styles.title}>New Account</Text>
 
       <Text>Username</Text>
@@ -82,7 +83,7 @@ export default function RegisterScreen({ navigation }) {
       />
       <Button onPress={onPressLearnMore} title="Register" />
       <Button onPress={() => navigation.navigate("Login")} title="Back" />
-    </View>
+    </BackgroundEnvironment>
   );
 }
 

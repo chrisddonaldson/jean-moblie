@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput } from "react-native";
+import BackgroundEnvironment from "../components/BackgroundEnvironment";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
 export default function Dashboard({ navigation }) {
   return (
-    <View style={styles.container}>
+    <BackgroundEnvironment style={styles.container}>
       <Text style={styles.title}>Success</Text>
 
       <Text>Dashboard</Text>
@@ -16,7 +17,7 @@ export default function Dashboard({ navigation }) {
         title="Go to notifications"
       />
       <Button onPress={() => navigation.openDrawer()} title="Nav" />
-    </View>
+    </BackgroundEnvironment>
   );
 }
 

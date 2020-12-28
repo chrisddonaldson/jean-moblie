@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+import { Text } from "../components/Themed";
 import Login from "react-native-login-keycloak";
 import Logo from "../components/Logo";
+import BackgroundEnvironment from "../components/BackgroundEnvironment";
 const checkIfTokensAreOnDevice = async () => {
   Login.getTokens()
     .then((res: any) => console.log(res))
@@ -31,9 +32,9 @@ export default function LoginScreen({ navigation }) {
   const [text, setText] = useState("");
 
   return (
-    <View style={styles.container}>
+    <BackgroundEnvironment style={styles.container}>
       <Logo />
-      <View style={styles.container}>
+      <View style={styles.middleContainer}>
         <Text style={styles.title}>Sign in</Text>
 
         <Text>Username</Text>
@@ -67,17 +68,23 @@ export default function LoginScreen({ navigation }) {
           title="New account"
         />
       </View>
-    </View>
+    </BackgroundEnvironment>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
-  middleContainer: {},
+
+  middleContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "center",
+    paddingLeft: 16,
+  },
 
   title: {
     fontSize: 20,

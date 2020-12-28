@@ -6,6 +6,7 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import Login from "react-native-login-keycloak";
 import navigation from "../navigation";
+import BackgroundEnvironment from "../components/BackgroundEnvironment";
 
 const checkIfTokensAreOnDevice = async () => {
   Login.getTokens()
@@ -15,7 +16,7 @@ const checkIfTokensAreOnDevice = async () => {
 
 export default function Success({ navigation }) {
   return (
-    <View style={styles.container}>
+    <BackgroundEnvironment />
       <Text style={styles.title}>Success</Text>
 
       <Text>Success</Text>
@@ -24,7 +25,7 @@ export default function Success({ navigation }) {
         title="Go to notifications"
       />
       <Button onPress={() => navigation.openDrawer()} title="Nav" />
-    </View>
+   
   );
 }
 
