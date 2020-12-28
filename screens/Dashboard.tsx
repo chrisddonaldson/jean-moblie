@@ -4,21 +4,13 @@ import { Button, StyleSheet, TextInput } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import Login from "react-native-login-keycloak";
-import navigation from "../navigation";
 
-const checkIfTokensAreOnDevice = async () => {
-  Login.getTokens()
-    .then((res: any) => console.log(res))
-    .catch((error: any) => console.log(error));
-};
-
-export default function Success({ navigation }) {
+export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Success</Text>
 
-      <Text>Success</Text>
+      <Text>Dashboard</Text>
       <Button
         onPress={() => navigation.navigate("Notifications")}
         title="Go to notifications"

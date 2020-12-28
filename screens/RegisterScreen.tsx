@@ -26,7 +26,7 @@ const login = async () => {
   });
 };
 
-export default function TabOneScreen() {
+export default function RegisterScreen({ navigation }) {
   const [text, setText] = useState("");
   const onPressLearnMore = () => {
     login();
@@ -34,7 +34,7 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Jean</Text>
+      <Text style={styles.title}>New Account</Text>
 
       <Text>Username</Text>
       <TextInput
@@ -58,12 +58,30 @@ export default function TabOneScreen() {
         onChangeText={(value) => setText(value)}
         value={text}
       />
-      <Button
-        onPress={onPressLearnMore}
-        title="Learn More"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
+      <Text>Repeat Password</Text>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 1,
+          minWidth: 200,
+        }}
+        onChangeText={(value) => setText(value)}
+        value={text}
       />
+      <Text>Email</Text>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 1,
+          minWidth: 200,
+        }}
+        onChangeText={(value) => setText(value)}
+        value={text}
+      />
+      <Button onPress={onPressLearnMore} title="Register" />
+      <Button onPress={() => navigation.navigate("Login")} title="Back" />
     </View>
   );
 }
