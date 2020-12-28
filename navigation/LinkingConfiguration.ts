@@ -8,6 +8,7 @@ export default {
         Login: "login",
         Register: "register",
         Dashboard: "dashboard",
+        Tabata: "tabata",
       },
     },
   },
