@@ -18,17 +18,23 @@ export default function Dashboard({ navigation }) {
   console.log(state);
   return (
     <BackgroundEnvironment style={styles.container}>
-      <View style={styles.header}>
-        <ColHeading>Dashboard</ColHeading>
-        <Logo />
+      <Header>
+        <LeftContainer>
+          <LogoBox>
+            <Logo />
+          </LogoBox>
+          <View style={{ justifyContent: "flex-end" }}>
+            <Breadcrumb>Dashboard</Breadcrumb>
+          </View>
+        </LeftContainer>
         {/* <Button
           onPress={() => navigation.navigate("Notifications")}
           title="Go to notifications"
         /> */}
         <Button onPress={() => navigation.openDrawer()} title="Nav" />
-      </View>
+      </Header>
       <Body>
-        <View style={{ marginRight: 8 }}>
+        {/* <View style={{ marginRight: 8 }}>
           <ColHeading>Info</ColHeading>
           <StatsBox
             style={{
@@ -62,14 +68,38 @@ export default function Dashboard({ navigation }) {
         {/* {data.schedules.map((v) => (
           <Schedule schedule={v} view={"TODAY"} />
         ))} */}
-        <View style={{ marginRight: 8 }}>
-          <ColHeading>Timeline</ColHeading>
-          <Timeline schedules={data.schedules} />
-        </View>
+        {/* <View style={{ marginRight: 8, flex: 1 }}>
+          <ColHeading>Timeline</ColHeading> */}
+        <Timeline schedules={data.schedules} />
+        {/* </View>*/}
       </Body>
     </BackgroundEnvironment>
   );
 }
+
+const Breadcrumb = styled.Text`
+  font-size: 32px;
+  line-height: 32px;
+  font-family: "Righteous";
+  color: ${colours.green};
+  vertical-align: bottom;
+  /* border: 1px solid red; */
+  margin: 8px;
+`;
+
+const LeftContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+`;
+
+const LogoBox = styled.View`
+  background-color: ${colours.darkTheme.light};
+  padding-left: 16px;
+  height: 100%;
+  padding-right: 16px;
+  justify-content: center;
+`;
 
 const Body = styled.View`
   /* border: 1px solid red; */
@@ -101,23 +131,23 @@ const ColHeading = styled.Text`
   color: ${colours.darkblue};
   text-transform: capitalize;
   font-size: 18px;
-
   font-weight: bold;
+`;
+const Header = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  max-height: 64;
+  background-color: ${colours.darkblue};
+  justify-content: space-between;
+
+  padding-right: 16px;
 `;
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    flexDirection: "row",
-    maxHeight: 64,
-    backgroundColor: `${colours.darkblue}`,
-    width: "100%",
-    justifyContent: "space-between",
-  },
-
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "flex-start",
   },
   title: {

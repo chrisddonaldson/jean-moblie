@@ -20,20 +20,72 @@ export function Timeline({ schedules }: TimelineInterface) {
   });
 
   return (
-    <>
-      <View>
-        {stack.map((v, i) => (
-          <EventTimeline e={v} view={"TODAY"} key={"EventTimeline" + i} />
-        ))}
-      </View>
-      <View>
-        <Pannel>
-          {stack.map((v, i) => (
-            <TimeLine e={v} key={"Timeline" + i} />
-          ))}
-        </Pannel>
-      </View>
-    </>
+    <Pannel
+      style={{
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
+        zIndex: 1,
+      }}
+    >
+      <Header
+        style={{
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 5,
+          },
+          shadowOpacity: 0.34,
+          shadowRadius: 6.27,
+          elevation: 10,
+          zIndex: 1,
+        }}
+      >
+        <HeaderLeft
+          style={{
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 5,
+            },
+            shadowOpacity: 0.34,
+            shadowRadius: 6.27,
+            elevation: 10,
+            zIndex: 1,
+          }}
+        >
+          <Text> Civil Twlight</Text>
+        </HeaderLeft>
+        <HeaderMiddle>
+          <TimeLabel> 10:02am</TimeLabel>
+        </HeaderMiddle>
+        <HeaderRight>
+          <NoteLabel>Tueday</NoteLabel>
+          <NoteLabel>02/01/2021</NoteLabel>
+          <NoteLabel>Earlsfield</NoteLabel>
+          <NoteLabel>17degs</NoteLabel>
+        </HeaderRight>
+      </Header>
+      <Body></Body>
+      <Footer
+        style={{
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: -5,
+          },
+          shadowOpacity: 0.34,
+          shadowRadius: 6.27,
+          elevation: 10,
+          zIndex: 1,
+        }}
+      ></Footer>
+    </Pannel>
   );
 }
 
@@ -41,9 +93,69 @@ function TimeLine(e: event) {
   return <Line></Line>;
 }
 
+const TimeLabel = styled.Text`
+  font-family: "Righteous";
+  color: white;
+  line-height: 40px;
+  font-size: 32px;
+`;
+
+const NoteLabel = styled.Text`
+  color: white;
+  line-height: 14px;
+  font-size: 12px;
+`;
+
+const Header = styled.View`
+  background-color: ${colours.darkTheme.middle};
+  display: flex;
+  flex-direction: row;
+  min-width: 280px;
+  color: white;
+  font-family: "Segoe UI";
+  border-bottom-color: ${colours.green};
+  overflow: hidden;
+  border-bottom-width: 1px;
+`;
+const Body = styled.View`
+  background-color: ${colours.darkTheme.dark};
+  display: flex;
+  flex-direction: row;
+  min-width: 320px;
+  color: white;
+  font-family: "Segoe UI";
+  min-height: 300px;
+`;
+const Footer = styled.View`
+  background-color: ${colours.darkTheme.dark};
+  display: flex;
+  flex-direction: row;
+  min-width: 320px;
+  color: white;
+  font-family: "Segoe UI";
+  min-height: 60px;
+  border-top-color: ${colours.green};
+  border-top-width: 1px;
+`;
+const HeaderLeft = styled.View`
+  background-color: ${colours.darkTheme.light};
+  flex: 1;
+  padding: 4px;
+`;
+const HeaderMiddle = styled.View`
+  flex: 3;
+  padding: 4px;
+`;
+const HeaderRight = styled.View`
+  flex: 1;
+  padding: 4px;
+  font-size: 12px;
+`;
+
 const Pannel = styled.View`
   background-color: ${colours.darkblue};
-  padding: 16px;
+  border-radius: 8;
+  overflow: hidden;
 `;
 const Line = styled.View`
   background-color: ${colours.darkblue};

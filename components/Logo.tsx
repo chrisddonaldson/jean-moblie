@@ -6,9 +6,9 @@ export default function Logo() {
   return (
     <View
       style={{
-        width: "100%",
-        height: 78,
-        // border: "1px solid green"
+        width: 80,
+        height: 54,
+        // border: "1px solid green",
       }}
     >
       <Image
