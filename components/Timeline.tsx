@@ -15,23 +15,21 @@ export function Timeline({ schedules }: TimelineInterface) {
   let stack: event[] = [];
   schedules.forEach((v) => {
     v.events.forEach((e) => {
-      console.log(e);
       stack.push(e);
     });
   });
 
-  console.log(stack);
   return (
     <>
       <View>
-        {stack.map((v) => (
-          <EventTimeline e={v} view={"TODAY"} />
+        {stack.map((v, i) => (
+          <EventTimeline e={v} view={"TODAY"} key={"EventTimeline" + i} />
         ))}
       </View>
       <View>
         <Pannel>
-          {stack.map((v) => (
-            <TimeLine e={v} />
+          {stack.map((v, i) => (
+            <TimeLine e={v} key={"Timeline" + i} />
           ))}
         </Pannel>
       </View>

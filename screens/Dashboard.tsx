@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput, View, Text } from "react-native";
+import { useSelector } from "react-redux";
 import styled from "styled-components/native";
 
 import { colours } from "../colours";
@@ -8,11 +9,13 @@ import BackgroundEnvironment from "../components/BackgroundEnvironment";
 import Logo from "../components/Logo";
 import Schedule from "../components/Schedule";
 import { Timeline } from "../components/Timeline";
+import { chatReducer } from "../redux/chat/chatReducer";
 import { chrisData } from "../sample_data/chris";
 
 export default function Dashboard({ navigation }) {
   const data = chrisData;
-
+  const state = useSelector((state) => state.chat);
+  console.log(state);
   return (
     <BackgroundEnvironment style={styles.container}>
       <View style={styles.header}>
@@ -50,8 +53,8 @@ export default function Dashboard({ navigation }) {
             <Stat>Number of Schedules: {data.schedules.length}</Stat>
           </StatsBox>
         </View>
-        {data.schedules.map((v) => (
-          <View style={{ marginRight: 8 }}>
+        {data.schedules.map((v, i) => (
+          <View style={{ marginRight: 8 }} key={"ColContainer" + i}>
             <ColHeading>Events: {v.name}</ColHeading>
             <Schedule schedule={v} view={"ALL"} />
           </View>

@@ -50,8 +50,8 @@ export default function ScheduleDisplay({ schedule, view }: scheduleInterface) {
     >
       <Stat>{schedule.name}</Stat>
       <Stat>Number of Events: {schedule.events.length}</Stat>
-      {schedule.events.map((e) => (
-        <EventTicket e={e} view={view} />
+      {schedule.events.map((e, i) => (
+        <EventTicket e={e} view={view} key={"EventTicket" + i} />
       ))}
     </StatsBox>
   );
@@ -62,7 +62,6 @@ interface EventTicket {
   view: "ALL" | "TODAY";
 }
 export const EventTicket = ({ e, view }: EventTicket) => {
-  console.log(e.description + " is happening today?");
   const isHappeningToday = happeningToday(e.routine) === "yes";
   let hidden = false;
 
@@ -93,7 +92,6 @@ export const EventTicket = ({ e, view }: EventTicket) => {
 };
 
 export const EventTimeline = ({ e, view }: EventTicket) => {
-  console.log(e.description + " is happening today?");
   const isHappeningToday = happeningToday(e.routine) === "yes";
   let hidden = false;
 

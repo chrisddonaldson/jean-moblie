@@ -29,21 +29,16 @@ export const TabataEngine: FunctionComponent<TabataEngineInterface> = ({
 
   // const [horay] = useSound(horraySfx)
   function tick() {
-    console.log("tick");
     if (isRunning) {
       setTimeLeft(timeLeft - 1);
 
       if (timeLeft - 1 < 0) {
         //increment the round
-        console.log("Time is less than 0");
         if (roundIndex + 1 < drill.rounds.length) {
-          console.log("getting next round");
           setRoundIndex(roundIndex + 1);
           setTimeLeft(drill.rounds[roundIndex + 1].length);
-          console.log("play");
           // beep()
         } else {
-          console.log("finish");
           setIsFinished(true);
           setRoundIndex(0);
           setIsRunning(false);
