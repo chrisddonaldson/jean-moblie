@@ -10,10 +10,11 @@ import Logo from "../components/Logo";
 import Schedule from "../components/Schedule";
 import { Timeline } from "../components/Timeline";
 import { chatReducer } from "../redux/chat/chatReducer";
+import { brieData } from "../sample_data/brie";
 import { chrisData } from "../sample_data/chris";
 
 export default function Dashboard({ navigation }) {
-  const data = chrisData;
+  const data1 = chrisData;
   const state = useSelector((state) => state.chat);
   console.log(state);
   return (
@@ -70,7 +71,8 @@ export default function Dashboard({ navigation }) {
         ))} */}
         {/* <View style={{ marginRight: 8, flex: 1 }}>
           <ColHeading>Timeline</ColHeading> */}
-        <Timeline schedules={data.schedules} />
+        <Timeline schedules={chrisData.schedules} />
+        <Timeline schedules={brieData.schedules} />
         {/* </View>*/}
       </Body>
     </BackgroundEnvironment>
