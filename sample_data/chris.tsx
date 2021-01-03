@@ -1,8 +1,9 @@
+import { colours } from "../colours";
 import { Schedule, UserDataInterface } from "./sample_data_types";
 
 const workoutSchdule: Schedule = {
   name: "workouts",
-  color: "green",
+  color: colours.red,
   events: [
     {
       description: "Pressup Day",
@@ -39,7 +40,7 @@ const workoutSchdule: Schedule = {
 
 const workSchdule: Schedule = {
   name: "work",
-  color: "red",
+  color: colours.green,
   events: [
     {
       description: "Digital Labs",
@@ -78,7 +79,7 @@ const workSchdule: Schedule = {
 
 const sleepSchedule: Schedule = {
   name: "sleep",
-  color: "blue",
+  color: colours.teal,
 
   events: [
     {
@@ -94,6 +95,39 @@ const sleepSchedule: Schedule = {
   ],
 };
 
+const dietSchedule: Schedule = {
+  name: "diet",
+  color: colours.yellow,
+
+  events: [
+    {
+      description: "Breakfast",
+      period: { start_time: "7:00", end_time: "7:20" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Snack",
+      period: { start_time: "10:00", end_time: "10:05" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Lunch",
+      period: { start_time: "13:00", end_time: "14:00" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Snack",
+      period: { start_time: "16:00", end_time: "16:05" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Diner",
+      period: { start_time: "18:00", end_time: "19:00" },
+      routine: "EVERYDAY",
+    },
+  ],
+};
+
 export const chrisData: UserDataInterface = {
   firstName: "Chris",
   secondName: "Donaldson",
@@ -101,5 +135,5 @@ export const chrisData: UserDataInterface = {
   weight: 92,
   dateOfBirth: "13/02/1995",
   weightGoal: 500,
-  schedules: [sleepSchedule, workSchdule, workoutSchdule],
+  schedules: [sleepSchedule, workSchdule, workoutSchdule, dietSchedule],
 };

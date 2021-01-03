@@ -6,12 +6,15 @@ import { Schedule, event } from "../sample_data/sample_data_types";
 import { FormatLength } from "../Utility/FormatLength";
 import { TimeToMins } from "../Utility/TimeUtil";
 
-interface TimelineGraphInterface {
+interface TimelineGraphLinesInterface {
   schedule: Schedule;
   yScale: number;
 }
 
-export function TimelineGraph({ schedule, yScale }: TimelineGraphInterface) {
+export function TimelineGraphLines({
+  schedule,
+  yScale,
+}: TimelineGraphLinesInterface) {
   console.log(schedule);
 
   return (
@@ -22,51 +25,69 @@ export function TimelineGraph({ schedule, yScale }: TimelineGraphInterface) {
 
         width: "100%",
         height: "100%",
+        paddingLeft: 8,
       }}
     >
       {schedule.events.map((e, i) => (
         // All fo these stack ontom of each other
         <View
           style={{
+            // borderColor: "red",
+            // borderWidth: 1,
             position: "absolute",
-            width: "100%",
+
             flex: 1,
             display: "flex",
           }}
-          key={"EventBox" + i}
         >
-          <EventBox e={e} color={schedule.color} yScale={yScale} />
+          <EventLine
+            e={e}
+            color={schedule.color}
+            yScale={yScale}
+            key={"EventLine" + i}
+          />
         </View>
       ))}
     </View>
   );
 }
 
-interface EventBoxInterface {
+interface EventLineInterface {
   e: event;
   color: string;
   yScale: number;
 }
-function EventBox({ e, color, yScale }: EventBoxInterface) {
+function EventLine({ e, color, yScale }: EventLineInterface) {
   let top = 0;
+  let height = 0;
   if ("start_time" in e.period) {
     top = TimeToMins(e.period.start_time) * yScale;
+    height = TimeToMins(e.period.end_time) * yScale - top;
     console.log(top);
   }
   return (
     <Spacer top={top}>
-      <Container color={color} style={colours.shadowStyle}>
-        <Heading color={color}>{e.description}</Heading>
-        {"start_time" in e.period ? (
-          <Label color={color}>
-            {e.period.start_time} - {e.period.end_time}
-          </Label>
-        ) : (
-          <Label color={color}>{FormatLength(e.period.length)}</Label>
-        )}
-      </Container>
+      <Dot color={color} distance={0} />
+      <Container color={color} height={height}></Container>
+      <Dot color={color} distance={0} />
     </Spacer>
   );
+}
+
+const Dot = styled.View<DotInterface>`
+  border-color: ${(props) => props.color};
+  background-color: #fff;
+  border-width: 3px;
+  width: 9px;
+  height: 9px;
+  border-radius: 4px;
+  /* left: -3px; */
+  bottom: ${(props) => props.distance};
+`;
+
+interface DotInterface {
+  color: string;
+  distance: number;
 }
 
 interface SpacerInterface {
@@ -75,26 +96,21 @@ interface SpacerInterface {
 
 interface ContainerInterface {
   color: string;
+  height: number;
 }
 
 const Spacer = styled.View<SpacerInterface>`
-  /* width: 100%; */
   top: ${(props) => props.top}px;
-  padding-left: 8px;
-  padding-right: 8px;
+  /* border-width: 1px; */
   display: flex;
-  min-height: 64px;
-  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.View<ContainerInterface>`
-  border-radius: 4px;
-  border-width: 2px;
-  border-color: ${(props) => props.color};
-  flex: 1;
-
-  padding: 8px;
-  background-color: ${colours.darkTheme.light};
+  background-color: ${(props) => props.color};
+  width: 3px;
+  min-height: ${(props) => props.height};
 `;
 
 interface HeadingInterface {

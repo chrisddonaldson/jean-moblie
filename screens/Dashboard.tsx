@@ -82,7 +82,7 @@ const Breadcrumb = styled.Text`
   line-height: 32px;
   font-family: "Righteous";
   color: ${colours.green};
-  vertical-align: bottom;
+  /* vertical-align: bottom; */
   /* border: 1px solid red; */
   margin: 8px;
 `;
@@ -104,12 +104,12 @@ const LogoBox = styled.View`
 const Body = styled.View`
   /* border: 1px solid red; */
   flex: 1;
-  width: 100%;
+
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: row;
-  margin-top: 8px;
-  margin-left: 8px;
+  margin: 8px;
+  display: flex;
 `;
 const StatsBox = styled.View`
   /* border: 1px solid black; */
@@ -137,7 +137,7 @@ const Header = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  max-height: 64;
+  max-height: 64px;
   background-color: ${colours.darkblue};
   justify-content: space-between;
 

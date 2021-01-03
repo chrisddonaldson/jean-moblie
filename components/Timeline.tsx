@@ -5,8 +5,8 @@ import logo from "../assets/JeanLogoImproved-05.png";
 import { colours } from "../colours";
 
 import { event, Schedule } from "../sample_data/sample_data_types";
-import { EventTicket, EventTimeline, happeningToday } from "./Schedule";
 import { TimelineGraph } from "./TimelineGraph";
+import { TimelineGraphContainer } from "./TimelineGraphContainer";
 
 interface TimelineInterface {
   schedules: Schedule[];
@@ -21,45 +21,9 @@ export function Timeline({ schedules }: TimelineInterface) {
   });
 
   return (
-    <Pannel
-      style={{
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 10,
-        zIndex: 1,
-      }}
-    >
-      <Header
-        style={{
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 5,
-          },
-          shadowOpacity: 0.34,
-          shadowRadius: 6.27,
-          elevation: 10,
-          zIndex: 1,
-        }}
-      >
-        <HeaderLeft
-          style={{
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.34,
-            shadowRadius: 6.27,
-            elevation: 10,
-            zIndex: 1,
-          }}
-        >
+    <Pannel style={[colours.shadowStyle, { zIndex: 1 }]}>
+      <Header style={[colours.shadowStyle, { zIndex: 1 }]}>
+        <HeaderLeft style={[colours.shadowStyle, { zIndex: 1 }]}>
           <Text> Civil Twlight</Text>
         </HeaderLeft>
         <HeaderMiddle>
@@ -73,9 +37,7 @@ export function Timeline({ schedules }: TimelineInterface) {
         </HeaderRight>
       </Header>
       <Body>
-        {schedules.map((v) => {
-          <TimelineGraph schedule={v} />;
-        })}
+        <TimelineGraphContainer schedules={schedules} />
       </Body>
       <Footer
         style={{
@@ -125,7 +87,7 @@ const Body = styled.View`
   min-width: 320px;
   color: white;
   font-family: "Segoe UI";
-  min-height: 300px;
+  flex: 1;
 `;
 const Footer = styled.View`
   background-color: ${colours.darkTheme.dark};
@@ -155,8 +117,11 @@ const HeaderRight = styled.View`
 
 const Pannel = styled.View`
   background-color: ${colours.darkblue};
-  border-radius: 8;
+  border-radius: 8px;
   overflow: hidden;
+  flex: 1;
+  display: flex;
+  height: 100%;
 `;
 const Line = styled.View`
   background-color: ${colours.darkblue};
