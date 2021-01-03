@@ -6,6 +6,7 @@ import { colours } from "../colours";
 
 import { event, Schedule } from "../sample_data/sample_data_types";
 import { EventTicket, EventTimeline, happeningToday } from "./Schedule";
+import { TimelineGraph } from "./TimelineGraph";
 
 interface TimelineInterface {
   schedules: Schedule[];
@@ -71,7 +72,11 @@ export function Timeline({ schedules }: TimelineInterface) {
           <NoteLabel>17degs</NoteLabel>
         </HeaderRight>
       </Header>
-      <Body></Body>
+      <Body>
+        {schedules.map((v) => {
+          <TimelineGraph schedule={v} />;
+        })}
+      </Body>
       <Footer
         style={{
           shadowColor: "#000",
@@ -87,10 +92,6 @@ export function Timeline({ schedules }: TimelineInterface) {
       ></Footer>
     </Pannel>
   );
-}
-
-function TimeLine(e: event) {
-  return <Line></Line>;
 }
 
 const TimeLabel = styled.Text`

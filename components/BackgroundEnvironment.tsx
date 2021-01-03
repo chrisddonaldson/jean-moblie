@@ -1,7 +1,5 @@
 import React from "react";
 
-import { colours } from "../constants/brandColors";
-
 import { LinearGradient } from "expo-linear-gradient";
 import { Text, View } from "../components/Themed";
 import { StyleSheet } from "react-native";
