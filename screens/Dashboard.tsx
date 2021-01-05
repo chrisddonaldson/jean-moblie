@@ -72,7 +72,7 @@ export default function Dashboard({ navigation }) {
         {/* <View style={{ marginRight: 8, flex: 1 }}>
           <ColHeading>Timeline</ColHeading> */}
         <Timeline schedules={chrisData.schedules} />
-        <Timeline schedules={brieData.schedules} />
+        {/* <Timeline schedules={brieData.schedules} /> */}
         {/* </View>*/}
       </Body>
     </BackgroundEnvironment>

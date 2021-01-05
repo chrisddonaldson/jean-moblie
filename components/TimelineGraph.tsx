@@ -24,20 +24,21 @@ export function TimelineGraph({ schedule, yScale }: TimelineGraphInterface) {
         height: "100%",
       }}
     >
-      {schedule.events.map((e, i) => (
-        // All fo these stack ontom of each other
-        <View
-          style={{
-            position: "absolute",
-            width: "100%",
-            flex: 1,
-            display: "flex",
-          }}
-          key={"EventBox" + i}
-        >
-          <EventBox e={e} color={schedule.color} yScale={yScale} />
-        </View>
-      ))}
+      {schedule.events.map((e, i) => {
+        return (
+          <View
+            style={{
+              position: "absolute",
+              width: "100%",
+              flex: 1,
+              display: "flex",
+            }}
+            key={"EventBox" + i}
+          >
+            <EventBox e={e} color={schedule.color} yScale={yScale} />
+          </View>
+        );
+      })}
     </View>
   );
 }

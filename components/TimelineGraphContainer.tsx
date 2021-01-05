@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { colours } from "../colours";
-import { Schedule } from "../sample_data/sample_data_types";
+import { Schedule, event } from "../sample_data/sample_data_types";
 import { TickFactory } from "./TickFactory";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
@@ -16,6 +16,25 @@ export const TimelineGraphContainer = ({
   schedules,
 }: TimelineGraphContainerInterface) => {
   let yScale = 1;
+
+  // For each event. check how many it overlaps with
+  // if it overlaps add one. to its index
+  // need to process all of the events first so that they're all in the smae list
+  // Brie's height calculation. Go over every 5 mins of the day and calucate the hight.
+  // If the height goes above 1 you have a island
+  // Split the events into islands.
+  // The array of islands has a length.
+  let allEvents: event[] = [];
+  useEffect(() => {
+    schedules.map((v) => {
+      // console.log(v.events);
+      allEvents.push(...v.events);
+    });
+    console.log(allEvents);
+
+    for (let i = 0; i < 24 * 60; i++) {}
+  }, []);
+
   return (
     <Container>
       <Header style={[colours.shadowStyle, { zIndex: 3 }]}>
@@ -38,13 +57,15 @@ export const TimelineGraphContainer = ({
             }}
           >
             <EventsCol style={[colours.shadowStyle, { elevation: 12 }]}>
-              {schedules.map((v, i) => (
+              {}
+
+              {/* {schedules.map((v, i) => (
                 <TimelineGraph
                   schedule={v}
                   yScale={yScale}
                   key={"TimelineGraph" + i}
                 />
-              ))}
+              ))} */}
             </EventsCol>
 
             <TickFactory yScale={yScale} />
