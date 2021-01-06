@@ -5,11 +5,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { colours } from "../colours";
 import { Schedule, event } from "../sample_data/sample_data_types";
+import { RandomId } from "../Utility/RandomId";
 import { TimeToMins } from "../Utility/TimeUtil";
 import { TickFactory } from "./TickFactory";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
-
+import _ from "lodash";
 interface TimelineGraphContainerInterface {
   schedules: Schedule[];
 }
@@ -19,81 +20,114 @@ export const TimelineGraphContainer = ({
 }: TimelineGraphContainerInterface) => {
   let yScale = 1;
 
-  // For each event. check how many it overlaps with
-  // if it overlaps add one. to its index
-  // need to process all of the events first so that they're all in the smae list
-  // Brie's height calculation. Go over every 5 mins of the day and calucate the hight.
-  // If the height goes above 1 you have a island
-  // Split the events into islands.
-  // The array of islands has a length.
   let allEvents: event[] = [];
   // @TODO
   useEffect(() => {
     schedules.map((v) => {
-      // console.log(v.events);
       allEvents.push(...v.events);
     });
-    console.log(allEvents);
-    // let depthArray: number[] = []
-    // for (let i = 0; i < 1440; i++) {
-    //   console.log(i);
-    //   let depth = 0;
-    //   allEvents.map((e) => {
-    //     if ("start_time" in e.period) {
-    //       const startTime = TimeToMins(e.period.start_time);
-    //       const endTime = TimeToMins(e.period.end_time);
 
-    //       if(startTime < i && i < endTime){
-    //         depth++;
-    //       }
-    //     }
-    //   });
-    //   depthArray.push
-
-    // BRIE METHOD
-    // split all the
-    interface Middle {
+    let allTimes: {
       time: string;
       value: number;
-    }
-    let allTimes: Middle[] = [];
+      initialPos: number;
+    }[] = [];
 
-    allEvents.map((e) => {
-      // all the start times
-      // all the end times
+    allEvents.map((e, i) => {
       if ("start_time" in e.period) {
-        allTimes.push({ time: e.period.start_time, value: 1 });
-        allTimes.push({ time: e.period.end_time, value: -1 });
+        allTimes.push({ time: e.period.start_time, value: 1, initialPos: i });
+        allTimes.push({ time: e.period.end_time, value: -1, initialPos: i });
       }
     });
-    console.log(allTimes);
 
     allTimes.sort((a, b) => TimeToMins(a.time) - TimeToMins(b.time));
-    // endTimes.sort((a, b) => TimeToMins(b.time) - TimeToMins(a.time));
-
-    console.log(allTimes);
 
     let cumsum = [0];
-
     allTimes.map((v, i) => {
       cumsum.push(cumsum[i] + v.value);
     });
-    console.log(cumsum);
-    // sorted combine top to bottom
 
-    // split number array to get islands
-    // island need a depth (biggest number)
-    // and and id
-    
+    let cumsumWithGroup: {
+      sum: number;
+      group_id: string;
+    }[] = [];
 
+    let groupIds = [RandomId()];
 
-    // for (i=0,i<cumsum.length; i++) {
-    //   if(cumsum[i]==0){
+    cumsum.map((c, i) => {
+      if (c === 0) {
+        groupIds.push(RandomId());
+      } else {
+        groupIds.push(groupIds[i]);
+      }
+    });
 
-    //   }
-    //   temparray = array.slice(i,i+chunk);
-      // do whatever
-  }
+    cumsum.map((c, i) => {
+      cumsumWithGroup.push({ sum: c, group_id: groupIds[i + 1] });
+    });
+
+    interface End {
+      time: string;
+      value: number;
+      depth: number;
+      initialPos: number;
+      group_id: string;
+    }
+
+    let results_array: End[] = [];
+
+    allTimes.map((v, i) => {
+      results_array.push({
+        time: v.time,
+        value: v.value,
+        depth: cumsumWithGroup[i + 1].sum,
+        group_id: cumsumWithGroup[i + 1].group_id,
+        initialPos: v.initialPos,
+      });
+    });
+
+    let start_time_with_depth: End[] = [];
+    let end_time_with_depth: End[] = [];
+
+    results_array.map((v) => {
+      if (v.value == 1) {
+        start_time_with_depth.push(v);
+      } else {
+        end_time_with_depth.push(v);
+      }
+    });
+
+    const distinctGroups = [
+      ...new Set(start_time_with_depth.map((x) => x.group_id)),
+    ];
+
+    let distinctGroupsWithDepth: { group_id: string; depth: number }[] = [];
+
+    distinctGroups.map((v) => {
+      let depth = 0;
+      start_time_with_depth.map((s) => {
+        if (v === s.group_id) {
+          if (s.depth > depth) {
+            depth = s.depth;
+          }
+        }
+      });
+      distinctGroupsWithDepth.push({ group_id: v, depth: depth });
+    });
+
+    console.log(distinctGroupsWithDepth);
+
+    let results: { event: event; group_id: string }[] = [];
+
+    start_time_with_depth.map((v) => {
+      allEvents.map((e, i) => {
+        if (i === v.initialPos) {
+          results.push({ event: e, group_id: v.group_id });
+        }
+      });
+    });
+
+    console.log(results);
   }, []);
 
   return (
