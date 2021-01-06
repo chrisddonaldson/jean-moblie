@@ -1,9 +1,11 @@
 import React, { Component, useEffect } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+
 import styled from "styled-components/native";
 import { colours } from "../colours";
 import { Schedule, event } from "../sample_data/sample_data_types";
+import { TimeToMins } from "../Utility/TimeUtil";
 import { TickFactory } from "./TickFactory";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
@@ -25,14 +27,73 @@ export const TimelineGraphContainer = ({
   // Split the events into islands.
   // The array of islands has a length.
   let allEvents: event[] = [];
+  // @TODO
   useEffect(() => {
     schedules.map((v) => {
       // console.log(v.events);
       allEvents.push(...v.events);
     });
     console.log(allEvents);
+    // let depthArray: number[] = []
+    // for (let i = 0; i < 1440; i++) {
+    //   console.log(i);
+    //   let depth = 0;
+    //   allEvents.map((e) => {
+    //     if ("start_time" in e.period) {
+    //       const startTime = TimeToMins(e.period.start_time);
+    //       const endTime = TimeToMins(e.period.end_time);
 
-    for (let i = 0; i < 24 * 60; i++) {}
+    //       if(startTime < i && i < endTime){
+    //         depth++;
+    //       }
+    //     }
+    //   });
+    //   depthArray.push
+
+    // BRIE METHOD
+    // split all the
+    interface Middle {
+      time: string;
+      value: number;
+    }
+    let allTimes: Middle[] = [];
+
+    allEvents.map((e) => {
+      // all the start times
+      // all the end times
+      if ("start_time" in e.period) {
+        allTimes.push({ time: e.period.start_time, value: 1 });
+        allTimes.push({ time: e.period.end_time, value: -1 });
+      }
+    });
+    console.log(allTimes);
+
+    allTimes.sort((a, b) => TimeToMins(a.time) - TimeToMins(b.time));
+    // endTimes.sort((a, b) => TimeToMins(b.time) - TimeToMins(a.time));
+
+    console.log(allTimes);
+
+    let cumsum = [0];
+
+    allTimes.map((v, i) => {
+      cumsum.push(cumsum[i] + v.value);
+    });
+    console.log(cumsum);
+    // sorted combine top to bottom
+
+    // split number array to get islands
+    // island need a depth (biggest number)
+    // and and id
+    
+
+
+    // for (i=0,i<cumsum.length; i++) {
+    //   if(cumsum[i]==0){
+
+    //   }
+    //   temparray = array.slice(i,i+chunk);
+      // do whatever
+  }
   }, []);
 
   return (
@@ -57,8 +118,6 @@ export const TimelineGraphContainer = ({
             }}
           >
             <EventsCol style={[colours.shadowStyle, { elevation: 12 }]}>
-              {}
-
               {/* {schedules.map((v, i) => (
                 <TimelineGraph
                   schedule={v}

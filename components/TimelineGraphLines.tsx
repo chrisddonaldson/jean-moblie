@@ -29,13 +29,12 @@ export function TimelineGraphLines({
       }}
     >
       {schedule.events.map((e, i) => (
-        // All fo these stack ontom of each other
+        // All fo these stack on top of each other
         <View
           style={{
             // borderColor: "red",
             // borderWidth: 1,
             position: "absolute",
-
             flex: 1,
             display: "flex",
           }}

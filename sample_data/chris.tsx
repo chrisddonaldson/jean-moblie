@@ -82,11 +82,11 @@ const sleepSchedule: Schedule = {
   color: colours.teal,
 
   events: [
-    {
-      description: "Big sleep",
-      period: { start_time: "23:00", end_time: "5:30" },
-      routine: "ON_WEEKDAYS",
-    },
+    // {
+    //   description: "Big sleep",
+    //   period: { start_time: "23:00", end_time: "5:30" },
+    //   routine: "ON_WEEKDAYS",
+    // },
     {
       description: "Little sleep",
       period: { start_time: "16:00", end_time: "16:20" },
@@ -103,6 +103,16 @@ const dietSchedule: Schedule = {
     {
       description: "Breakfast",
       period: { start_time: "7:00", end_time: "7:20" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Breakfast",
+      period: { start_time: "7:05", end_time: "7:20" },
+      routine: "EVERYDAY",
+    },
+    {
+      description: "Breakfast",
+      period: { start_time: "6:00", end_time: "10:20" },
       routine: "EVERYDAY",
     },
     {
