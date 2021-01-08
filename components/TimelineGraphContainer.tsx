@@ -12,6 +12,7 @@ import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
 import _ from "lodash";
 import { EventsByDetph, EventByDepth } from "../Utility/EventsByDepth";
+import { CurrentTime } from "./CurrentTime";
 interface TimelineGraphContainerInterface {
   schedules: Schedule[];
 }
@@ -65,13 +66,16 @@ export const TimelineGraphContainer = ({
             <TickFactory yScale={yScale} />
 
             <BlocksCol>
-              {schedules.map((v, i) => (
-                <TimelineGraphLines
-                  schedule={v}
-                  yScale={yScale}
-                  key={"TimelineGraphLines" + i}
-                />
-              ))}
+              {eventsByDepth !== undefined
+                ? eventsByDepth.map((v, i) => (
+                    <TimelineGraphLines
+                      eventByDepth={v}
+                      yScale={yScale}
+                      key={"TimelineGraph" + i}
+                    />
+                  ))
+                : null}
+              <CurrentTime yScale={yScale}></CurrentTime>
             </BlocksCol>
           </View>
         </BodyScroll>
@@ -82,7 +86,7 @@ export const TimelineGraphContainer = ({
 
 const Container = styled.View`
   background-color: ${colours.darkTheme.middle};
-  margin: 4px;
+  margin: 1px;
   border-radius: 4px;
   flex: 1;
   overflow: hidden;

@@ -5,6 +5,7 @@ import logo from "../assets/JeanLogoImproved-05.png";
 import { colours } from "../colours";
 
 import { event, Schedule } from "../sample_data/sample_data_types";
+import { GetCurrentTime } from "../Utility/GetCurrentTime";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphContainer } from "./TimelineGraphContainer";
 
@@ -27,7 +28,7 @@ export function Timeline({ schedules }: TimelineInterface) {
           <Text> Civil Twlight</Text>
         </HeaderLeft>
         <HeaderMiddle>
-          <TimeLabel> 10:02am</TimeLabel>
+          <TimeLabel> {GetCurrentTime()}am</TimeLabel>
         </HeaderMiddle>
         <HeaderRight>
           <NoteLabel>Tueday</NoteLabel>

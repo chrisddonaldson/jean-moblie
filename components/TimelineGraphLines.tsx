@@ -3,45 +3,48 @@ import { Text, View } from "react-native";
 import styled from "styled-components/native";
 import { colours } from "../colours";
 import { Schedule, event } from "../sample_data/sample_data_types";
+import { EventByDepth } from "../Utility/EventsByDepth";
 import { FormatLength } from "../Utility/FormatLength";
 import { TimeToMins } from "../Utility/TimeUtil";
 
 interface TimelineGraphLinesInterface {
-  schedule: Schedule;
+  eventByDepth: EventByDepth;
   yScale: number;
 }
 
 export function TimelineGraphLines({
-  schedule,
+  eventByDepth,
   yScale,
 }: TimelineGraphLinesInterface) {
-  console.log(schedule);
+  console.log(eventByDepth);
 
   return (
     // acts as the fixed pinboard
     <View
       style={{
         position: "absolute",
-
+        display: "flex",
+        flexDirection: "row",
         width: "100%",
         height: "100%",
         paddingLeft: 8,
       }}
     >
-      {schedule.events.map((e, i) => (
+      {eventByDepth.events.map((e, i) => (
         // All fo these stack on top of each other
         <View
           style={{
             // borderColor: "red",
             // borderWidth: 1,
-            position: "absolute",
+
             flex: 1,
             display: "flex",
+            // border: "1px solid black",
           }}
         >
           <EventLine
             e={e}
-            color={schedule.color}
+            color={e.color}
             yScale={yScale}
             key={"EventLine" + i}
           />
@@ -69,6 +72,7 @@ function EventLine({ e, color, yScale }: EventLineInterface) {
       <Dot color={color} distance={0} />
       <Container color={color} height={height}></Container>
       <Dot color={color} distance={0} />
+      <Fill color={color} />
     </Spacer>
   );
 }
@@ -83,6 +87,20 @@ const Dot = styled.View<DotInterface>`
   /* left: -3px; */
   bottom: ${(props) => props.distance};
 `;
+
+const Fill = styled.View<FillInterface>`
+  background-color: ${(props) => props.color};
+  opacity: 0.1;
+  position: absolute;
+  margin: 3px;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+`;
+
+interface FillInterface {
+  color: string;
+}
 
 interface DotInterface {
   color: string;

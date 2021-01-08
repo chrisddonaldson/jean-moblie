@@ -28,52 +28,11 @@ export default function Dashboard({ navigation }) {
             <Breadcrumb>Dashboard</Breadcrumb>
           </View>
         </LeftContainer>
-        {/* <Button
-          onPress={() => navigation.navigate("Notifications")}
-          title="Go to notifications"
-        /> */}
+
         <Button onPress={() => navigation.openDrawer()} title="Nav" />
       </Header>
       <Body>
-        {/* <View style={{ marginRight: 8 }}>
-          <ColHeading>Info</ColHeading>
-          <StatsBox
-            style={{
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 1,
-              },
-              shadowOpacity: 0.2,
-              shadowRadius: 1.41,
-
-              elevation: 2,
-            }}
-          >
-            <Stat>
-              Name: {data.firstName} {data.secondName}
-            </Stat>
-            <Stat>Gender: {data.gender}</Stat>
-            <Stat>Current Weight: {data.weight}kg</Stat>
-            <Stat>Date of Birth: {data.dateOfBirth}</Stat>
-            <Stat>Weight Goal: {data.weightGoal}</Stat>
-            <Stat>Number of Schedules: {data.schedules.length}</Stat>
-          </StatsBox>
-        </View>
-        {data.schedules.map((v, i) => (
-          <View style={{ marginRight: 8 }} key={"ColContainer" + i}>
-            <ColHeading>Events: {v.name}</ColHeading>
-            <Schedule schedule={v} view={"ALL"} />
-          </View>
-        ))}
-        {/* {data.schedules.map((v) => (
-          <Schedule schedule={v} view={"TODAY"} />
-        ))} */}
-        {/* <View style={{ marginRight: 8, flex: 1 }}>
-          <ColHeading>Timeline</ColHeading> */}
         <Timeline schedules={chrisData.schedules} />
-        {/* <Timeline schedules={brieData.schedules} /> */}
-        {/* </View>*/}
       </Body>
     </BackgroundEnvironment>
   );
@@ -84,8 +43,7 @@ const Breadcrumb = styled.Text`
   line-height: 32px;
   font-family: "Righteous";
   color: ${colours.green};
-  /* vertical-align: bottom; */
-  /* border: 1px solid red; */
+
   margin: 8px;
 `;
 

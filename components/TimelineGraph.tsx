@@ -79,8 +79,9 @@ interface HeadingInterface {
 
 const Spacer = styled.View<SpacerInterface>`
   top: ${(props) => props.top}px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 1px;
+  padding-right: 1px;
+  /* border: 1px solid blue; */
   display: flex;
   min-height: 64px;
   flex: 1;
@@ -91,7 +92,8 @@ const Container = styled.View<ContainerInterface>`
   border-width: 2px;
   border-color: ${(props) => props.color};
   flex: 1;
-  padding: 8px;
+  padding: 2px;
+  padding-left: 4px;
   background-color: ${colours.darkTheme.light};
 `;
 
