@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -11,6 +11,7 @@ import { TickFactory } from "./TickFactory";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
 import _ from "lodash";
+import { EventsByDetph, EventByDepth } from "../Utility/EventsByDepth";
 interface TimelineGraphContainerInterface {
   schedules: Schedule[];
 }
@@ -19,117 +20,15 @@ export const TimelineGraphContainer = ({
   schedules,
 }: TimelineGraphContainerInterface) => {
   let yScale = 1;
+  let [eventsByDepth, setEventsByDepth] = useState<EventByDepth[]>();
 
-  let allEvents: event[] = [];
   // @TODO
   useEffect(() => {
-    schedules.map((v) => {
-      allEvents.push(...v.events);
-    });
-
-    let allTimes: {
-      time: string;
-      value: number;
-      initialPos: number;
-    }[] = [];
-
-    allEvents.map((e, i) => {
-      if ("start_time" in e.period) {
-        allTimes.push({ time: e.period.start_time, value: 1, initialPos: i });
-        allTimes.push({ time: e.period.end_time, value: -1, initialPos: i });
-      }
-    });
-
-    allTimes.sort((a, b) => TimeToMins(a.time) - TimeToMins(b.time));
-
-    let cumsum = [0];
-    allTimes.map((v, i) => {
-      cumsum.push(cumsum[i] + v.value);
-    });
-
-    let cumsumWithGroup: {
-      sum: number;
-      group_id: string;
-    }[] = [];
-
-    let groupIds = [RandomId()];
-
-    cumsum.map((c, i) => {
-      if (c === 0) {
-        groupIds.push(RandomId());
-      } else {
-        groupIds.push(groupIds[i]);
-      }
-    });
-
-    cumsum.map((c, i) => {
-      cumsumWithGroup.push({ sum: c, group_id: groupIds[i + 1] });
-    });
-
-    interface End {
-      time: string;
-      value: number;
-      depth: number;
-      initialPos: number;
-      group_id: string;
-    }
-
-    let results_array: End[] = [];
-
-    allTimes.map((v, i) => {
-      results_array.push({
-        time: v.time,
-        value: v.value,
-        depth: cumsumWithGroup[i + 1].sum,
-        group_id: cumsumWithGroup[i + 1].group_id,
-        initialPos: v.initialPos,
-      });
-    });
-
-    let start_time_with_depth: End[] = [];
-    let end_time_with_depth: End[] = [];
-
-    results_array.map((v) => {
-      if (v.value == 1) {
-        start_time_with_depth.push(v);
-      } else {
-        end_time_with_depth.push(v);
-      }
-    });
-
-    const distinctGroups = [
-      ...new Set(start_time_with_depth.map((x) => x.group_id)),
-    ];
-
-    let distinctGroupsWithDepth: { group_id: string; depth: number }[] = [];
-
-    distinctGroups.map((v) => {
-      let depth = 0;
-      start_time_with_depth.map((s) => {
-        if (v === s.group_id) {
-          if (s.depth > depth) {
-            depth = s.depth;
-          }
-        }
-      });
-      distinctGroupsWithDepth.push({ group_id: v, depth: depth });
-    });
-
-    console.log(distinctGroupsWithDepth);
-
-    let results: { event: event; group_id: string }[] = [];
-
-    start_time_with_depth.map((v) => {
-      allEvents.map((e, i) => {
-        if (i === v.initialPos) {
-          results.push({ event: e, group_id: v.group_id });
-        }
-      });
-    });
-
-    console.log(results);
-  }, []);
-
+    setEventsByDepth(EventsByDetph(schedules));
+  }, [schedules]);
+  console.log("=-=-=-=-=-=");
+  console.log(eventsByDepth);
+  console.log("=-=-=-=-=-=");
   return (
     <Container>
       <Header style={[colours.shadowStyle, { zIndex: 3 }]}>
@@ -152,13 +51,15 @@ export const TimelineGraphContainer = ({
             }}
           >
             <EventsCol style={[colours.shadowStyle, { elevation: 12 }]}>
-              {/* {schedules.map((v, i) => (
-                <TimelineGraph
-                  schedule={v}
-                  yScale={yScale}
-                  key={"TimelineGraph" + i}
-                />
-              ))} */}
+              {eventsByDepth !== undefined
+                ? eventsByDepth.map((v, i) => (
+                    <TimelineGraph
+                      eventByDepth={v}
+                      yScale={yScale}
+                      key={"TimelineGraph" + i}
+                    />
+                  ))
+                : null}
             </EventsCol>
 
             <TickFactory yScale={yScale} />
