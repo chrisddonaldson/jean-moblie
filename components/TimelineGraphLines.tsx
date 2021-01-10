@@ -31,12 +31,9 @@ export function TimelineGraphLines({
       }}
     >
       {eventByDepth.events.map((e, i) => (
-        // All fo these stack on top of each other
         <View
+          key={"TimeLineGraph" + i}
           style={{
-            // borderColor: "red",
-            // borderWidth: 1,
-
             flex: 1,
             display: "flex",
             // border: "1px solid black",
@@ -69,13 +66,27 @@ function EventLine({ e, color, yScale }: EventLineInterface) {
   }
   return (
     <Spacer top={top}>
-      <Dot color={color} distance={0} />
+      <Line color={color} bottom={height} top={0} />
+      <Dot color={color} bottom={height} top={0} />
       <Container color={color} height={height}></Container>
-      <Dot color={color} distance={0} />
+      <Dot color={color} bottom={0} top={height} />
+      <Line color={color} bottom={0} top={height} />
       <Fill color={color} />
     </Spacer>
   );
 }
+
+const Line = styled.View<DotInterface>`
+  background-color: ${(props) => props.color};
+  /* background-color: #fff; */
+  width: 100%;
+  height: 1px;
+  border-radius: 4px;
+  position: absolute;
+  /* left: -3px; */
+  bottom: ${(props) => props.bottom}px;
+  top: ${(props) => props.top}px;
+`;
 
 const Dot = styled.View<DotInterface>`
   border-color: ${(props) => props.color};
@@ -84,8 +95,10 @@ const Dot = styled.View<DotInterface>`
   width: 9px;
   height: 9px;
   border-radius: 4px;
+  position: absolute;
   /* left: -3px; */
-  bottom: ${(props) => props.distance};
+  bottom: ${(props) => props.bottom - 4}px;
+  top: ${(props) => props.top - 4}px;
 `;
 
 const Fill = styled.View<FillInterface>`
@@ -93,7 +106,7 @@ const Fill = styled.View<FillInterface>`
   opacity: 0.1;
   position: absolute;
   margin: 3px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   height: 100%;
   width: 100%;
 `;
@@ -104,7 +117,8 @@ interface FillInterface {
 
 interface DotInterface {
   color: string;
-  distance: number;
+  top: number;
+  bottom: number;
 }
 
 interface SpacerInterface {
@@ -127,7 +141,7 @@ const Spacer = styled.View<SpacerInterface>`
 const Container = styled.View<ContainerInterface>`
   background-color: ${(props) => props.color};
   width: 3px;
-  min-height: ${(props) => props.height};
+  min-height: ${(props) => props.height}px;
 `;
 
 interface HeadingInterface {

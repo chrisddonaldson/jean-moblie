@@ -11,7 +11,7 @@ import Schedule from "../components/Schedule";
 import { Timeline } from "../components/Timeline";
 import { chatReducer } from "../redux/chat/chatReducer";
 import { brieData } from "../sample_data/brie";
-import { chrisData } from "../sample_data/chris";
+import { chrisData } from "../sample_data/ChrisSunday";
 
 export default function Dashboard({ navigation }) {
   const data1 = chrisData;

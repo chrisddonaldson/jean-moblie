@@ -1,10 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput } from "react-native";
-
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
-
+import { Text } from "../components/Themed";
 import BackgroundEnvironment from "../components/BackgroundEnvironment";
 
 export default function RegisterScreen({ navigation }) {
@@ -58,7 +55,12 @@ export default function RegisterScreen({ navigation }) {
         onChangeText={(value) => setText(value)}
         value={text}
       />
-      <Button onPress={onPressLearnMore} title="Register" />
+      <Button
+        onPress={() => {
+          console.log("Register");
+        }}
+        title="Register"
+      />
       <Button onPress={() => navigation.navigate("Login")} title="Back" />
     </BackgroundEnvironment>
   );

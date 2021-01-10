@@ -24,7 +24,13 @@ export function TimelineGraph({
     >
       {eventByDepth.events.map((e, i) => {
         return (
-          <EventBox e={e} color={e.color} yScale={yScale} maxWidth={width} />
+          <EventBox
+            e={e}
+            color={e.color}
+            yScale={yScale}
+            maxWidth={width}
+            key={"eventbox" + i}
+          />
         );
       })}
     </View>
