@@ -8,6 +8,7 @@
     "eject": "expo eject",
     "test": "jest --watchAll",
     "deploy": "netlify deploy",
+    "deploy-production": "netlify deploy --prod",
     "web-build": "expo build:web"
   },
   "jest": {
