@@ -41,7 +41,7 @@ function EventBox({ e, color, yScale, maxWidth }: EventBoxInterface) {
   let top = 0;
   if ("start_time" in e.period) {
     top = TimeToMins(e.period.start_time) * yScale;
-    console.log(top);
+    // console.log(top);
   }
   return (
     <Spacer top={top}>

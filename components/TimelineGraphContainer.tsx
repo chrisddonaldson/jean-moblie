@@ -15,21 +15,21 @@ import { EventsByDetph, EventByDepth } from "../Utility/EventsByDepth";
 import { CurrentTime } from "./CurrentTime";
 interface TimelineGraphContainerInterface {
   schedules: Schedule[];
+  yScale: number;
 }
 
 export const TimelineGraphContainer = ({
   schedules,
+  yScale,
 }: TimelineGraphContainerInterface) => {
-  let yScale = 1;
+  // let yScale = 1;
   let [eventsByDepth, setEventsByDepth] = useState<EventByDepth[]>();
 
   // @TODO
   useEffect(() => {
     setEventsByDepth(EventsByDetph(schedules));
   }, [schedules]);
-  console.log("=-=-=-=-=-=");
-  console.log(eventsByDepth);
-  console.log("=-=-=-=-=-=");
+
   return (
     <Container>
       <Header style={[colours.shadowStyle, { zIndex: 3 }]}>

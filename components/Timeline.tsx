@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Button, Image, StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
 import logo from "../assets/JeanLogoImproved-05.png";
 import { colours } from "../colours";
 
 import { event, Schedule } from "../sample_data/sample_data_types";
-import { GetCurrentTime } from "../Utility/GetCurrentTime";
+import {
+  GetCurrentTime,
+  GetCurrentTimeFromDate,
+  GetDisplayTimeFormat,
+} from "../Utility/GetCurrentTime";
+import { TimeToMins } from "../Utility/TimeUtil";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphContainer } from "./TimelineGraphContainer";
 
@@ -21,6 +26,21 @@ export function Timeline({ schedules }: TimelineInterface) {
     });
   });
 
+  const [time, setTime] = useState(new Date());
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    // set up timer
+    let timer = setTimeout(() => {
+      setTime(new Date());
+      // console.log("tick");
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [time]);
+
   return (
     <Pannel style={[colours.shadowStyle, { zIndex: 1 }]}>
       <Header style={[colours.shadowStyle, { zIndex: 1 }]}>
@@ -28,17 +48,17 @@ export function Timeline({ schedules }: TimelineInterface) {
           <Text> Civil Twlight</Text>
         </HeaderLeft>
         <HeaderMiddle>
-          <TimeLabel> {GetCurrentTime()}am</TimeLabel>
+          <TimeLabel> {GetDisplayTimeFormat(time)}</TimeLabel>
         </HeaderMiddle>
         <HeaderRight>
-          <NoteLabel>Tueday</NoteLabel>
-          <NoteLabel>02/01/2021</NoteLabel>
+          {/* <NoteLabel>{time.getDay()}</NoteLabel> */}
+          <NoteLabel>{time.toDateString()}</NoteLabel>
           <NoteLabel>Earlsfield</NoteLabel>
           <NoteLabel>17degs</NoteLabel>
         </HeaderRight>
       </Header>
       <Body>
-        <TimelineGraphContainer schedules={schedules} />
+        <TimelineGraphContainer schedules={schedules} yScale={scale} />
       </Body>
       <Footer
         style={{
@@ -52,7 +72,13 @@ export function Timeline({ schedules }: TimelineInterface) {
           elevation: 10,
           zIndex: 1,
         }}
-      ></Footer>
+      >
+        <Button onPress={() => setScale(1)} title="Scale 1" />
+        <Button onPress={() => setScale(2)} title="Scale 2" />
+        <Button onPress={() => setScale(3)} title="Scale 3" />
+        <Button onPress={() => setScale(4)} title="Scale 4" />
+        <Button onPress={() => setScale(5)} title="Scale 5" />
+      </Footer>
     </Pannel>
   );
 }

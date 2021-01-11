@@ -1,10 +1,13 @@
 import { View } from "react-native";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components/native";
 import { TimeToMins } from "../Utility/TimeUtil";
-import { GetCurrentTime } from "../Utility/GetCurrentTime";
+import {
+  GetCurrentTime,
+  GetCurrentTimeFromDate,
+} from "../Utility/GetCurrentTime";
 import { colours } from "../colours";
 
 interface CurrentTimeInterface {
@@ -16,8 +19,21 @@ export function CurrentTime({ yScale }: CurrentTimeInterface) {
   // get the time
   // time to position
   const top = 100;
+  const [time, setTime] = useState(new Date());
+  let timer;
+  const yOffset = TimeToMins(GetCurrentTimeFromDate(time)) * yScale;
 
-  const yOffset = TimeToMins(GetCurrentTime()) * yScale;
+  useEffect(() => {
+    // set up timer
+    let timer = setTimeout(() => {
+      setTime(new Date());
+      console.log("tick");
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [time]);
 
   return (
     <Line
