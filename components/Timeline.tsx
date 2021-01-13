@@ -5,6 +5,7 @@ import logo from "../assets/JeanLogoImproved-05.png";
 import { colours } from "../colours";
 
 import { event, Schedule } from "../sample_data/sample_data_types";
+import { HomePullupDay, makeWorkout } from "../sample_data/Workouts/ChinUps";
 import {
   GetCurrentTime,
   GetCurrentTimeFromDate,
@@ -19,6 +20,8 @@ interface TimelineInterface {
 }
 
 export function Timeline({ schedules }: TimelineInterface) {
+  makeWorkout(HomePullupDay);
+
   let stack: event[] = [];
   schedules.forEach((v) => {
     v.events.forEach((e) => {
