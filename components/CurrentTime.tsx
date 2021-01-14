@@ -3,7 +3,7 @@ import { View } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import styled from "styled-components/native";
-import { TimeToMins } from "../Utility/TimeUtil";
+import { TimeToHours, TimeToMins } from "../Utility/TimeUtil";
 import {
   GetCurrentTime,
   GetCurrentTimeFromDate,
@@ -21,7 +21,7 @@ export function CurrentTime({ yScale }: CurrentTimeInterface) {
   const top = 100;
   const [time, setTime] = useState(new Date());
   let timer;
-  const yOffset = TimeToMins(GetCurrentTimeFromDate(time)) * yScale;
+  const yOffset = TimeToHours(GetCurrentTimeFromDate(time)) * yScale;
 
   useEffect(() => {
     // set up timer

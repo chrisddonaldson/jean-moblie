@@ -4,7 +4,10 @@ export function GetCurrentTime() {
 }
 
 export function GetCurrentTimeFromDate(today: Date) {
-  return today.getHours() + ":" + today.getMinutes();
+  const time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  console.log(time);
+  return time;
 }
 
 export function GetDisplayTimeFormat(today: Date) {

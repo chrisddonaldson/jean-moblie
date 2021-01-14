@@ -10,6 +10,17 @@ export function TimeToSecs(timeString: string) {
   let sec = +split[2];
   return +hours + mins + sec;
 }
+export function TimeToHours(timeString: string) {
+  let split = timeString.split(":");
+
+  if (split[2]) {
+    return +split[0] + +split[1] / 60 + +split[2] / 60 / 60;
+  } else {
+    return +split[0] + +split[1] / 60;
+  }
+
+  // return +(+split[0] * 60) + +split[1];
+}
 
 export function SecsToTime(secs: number) {
   console.log("===========");

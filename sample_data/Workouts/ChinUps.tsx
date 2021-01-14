@@ -2,7 +2,7 @@
 
 import { SecsToTime, TimeToMins, TimeToSecs } from "../../Utility/TimeUtil";
 
-interface Exercise {
+export interface Exercise {
   name: string;
   reps: number;
   sets: number;

@@ -5,7 +5,7 @@ import { colours } from "../colours";
 import { Schedule, event } from "../sample_data/sample_data_types";
 import { EventByDepth } from "../Utility/EventsByDepth";
 import { FormatLength } from "../Utility/FormatLength";
-import { TimeToMins } from "../Utility/TimeUtil";
+import { TimeToHours, TimeToMins } from "../Utility/TimeUtil";
 
 export function TimelineGraph({
   eventByDepth,
@@ -40,7 +40,7 @@ export function TimelineGraph({
 function EventBox({ e, color, yScale, maxWidth }: EventBoxInterface) {
   let top = 0;
   if ("start_time" in e.period) {
-    top = TimeToMins(e.period.start_time) * yScale;
+    top = TimeToHours(e.period.start_time) * yScale;
     // console.log(top);
   }
   return (

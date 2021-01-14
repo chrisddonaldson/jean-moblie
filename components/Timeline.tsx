@@ -30,7 +30,7 @@ export function Timeline({ schedules }: TimelineInterface) {
   });
 
   const [time, setTime] = useState(new Date());
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(2000);
 
   useEffect(() => {
     // set up timer
@@ -76,11 +76,11 @@ export function Timeline({ schedules }: TimelineInterface) {
           zIndex: 1,
         }}
       >
-        <Button onPress={() => setScale(1)} title="Scale 1" />
-        <Button onPress={() => setScale(2)} title="Scale 2" />
-        <Button onPress={() => setScale(3)} title="Scale 3" />
-        <Button onPress={() => setScale(4)} title="Scale 4" />
-        <Button onPress={() => setScale(5)} title="Scale 5" />
+        <Button onPress={() => setScale(100)} title="Scale 1" />
+        <Button onPress={() => setScale(300)} title="Scale 2" />
+        <Button onPress={() => setScale(800)} title="Scale 3" />
+        <Button onPress={() => setScale(1200)} title="Scale 4" />
+        <Button onPress={() => setScale(2000)} title="Scale 5" />
       </Footer>
     </Pannel>
   );

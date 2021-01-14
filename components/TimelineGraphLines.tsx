@@ -5,7 +5,7 @@ import { colours } from "../colours";
 import { Schedule, event } from "../sample_data/sample_data_types";
 import { EventByDepth } from "../Utility/EventsByDepth";
 import { FormatLength } from "../Utility/FormatLength";
-import { TimeToMins } from "../Utility/TimeUtil";
+import { TimeToHours, TimeToMins } from "../Utility/TimeUtil";
 
 interface TimelineGraphLinesInterface {
   eventByDepth: EventByDepth;
@@ -60,8 +60,8 @@ function EventLine({ e, color, yScale }: EventLineInterface) {
   let top = 0;
   let height = 0;
   if ("start_time" in e.period) {
-    top = TimeToMins(e.period.start_time) * yScale;
-    height = TimeToMins(e.period.end_time) * yScale - top;
+    top = TimeToHours(e.period.start_time) * yScale;
+    height = TimeToHours(e.period.end_time) * yScale - top;
     // console.log(top);
   }
   return (
