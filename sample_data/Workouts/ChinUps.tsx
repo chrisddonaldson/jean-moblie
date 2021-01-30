@@ -99,4 +99,5 @@ export function makeWorkout(exercise: Exercise[]) {
     }
   });
   console.log(results);
+  return results;
 }

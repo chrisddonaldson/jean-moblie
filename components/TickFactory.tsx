@@ -132,7 +132,8 @@ function MinTicks(yScale: number) {
   return ticks;
 }
 
-export const TickFactory = ({ yScale }: TickFactoryInterface) => {
+export const TickFactory = React.memo(TickFactoryD);
+function TickFactoryD({ yScale }: TickFactoryInterface) {
   const showSeconds = false;
 
   const hourTicks = true;
@@ -160,7 +161,7 @@ export const TickFactory = ({ yScale }: TickFactoryInterface) => {
       {/* {ticks.map((v) => v)} */}
     </TickCol>
   );
-};
+}
 
 interface BigTickInterface {
   height: number;

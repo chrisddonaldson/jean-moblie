@@ -79,7 +79,7 @@ export const HomeLegDay: Exercise[] = [
   },
 */
 export function LegDayMakeWorkout(exercise: Exercise[]) {
-  let startTime = "15:30:00";
+  let startTime = "17:05:00";
   const work = 30;
   const rest = 60;
   let results: event[] = [];

@@ -42,7 +42,7 @@ const workSchdule: Schedule = {
     },
     {
       description: "Digital Labs",
-      period: { start_time: "13:30", end_time: "15:30" },
+      period: { start_time: "14:00", end_time: "17:00" },
       routine: "ON_WEEKDAYS",
     },
     // {
@@ -52,13 +52,8 @@ const workSchdule: Schedule = {
     // },
 
     {
-      description: "Digital Labs",
-      period: { start_time: "17:30", end_time: "18:30" },
-      routine: "ON_WEEKDAYS",
-    },
-    {
       description: "Duolingo",
-      period: { start_time: "17:00", end_time: "17:30" },
+      period: { start_time: "18:30", end_time: "19:00" },
       routine: "EVERYDAY",
     },
 
