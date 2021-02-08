@@ -1,5 +1,6 @@
 import { colours } from "../colours";
 import { Schedule, UserDataInterface } from "./sample_data_types";
+import { HomeHandstandDay } from "./Workouts/Handstand";
 import { MakeWorkout } from "./Workouts/MakeWorkout";
 import { HomePushupDay } from "./Workouts/PushUps";
 
@@ -9,10 +10,10 @@ const workoutSchdule: Schedule = {
   events: [
     {
       description: "Walk",
-      period: { start_time: "9:30", end_time: "10:30" },
+      period: { start_time: "9:30", end_time: "10:00" },
       routine: "EVERYDAY",
     },
-    ...MakeWorkout(HomePushupDay, "14:10:00"),
+    ...MakeWorkout(HomeHandstandDay, "17:00:00"),
   ],
 };
 
@@ -27,7 +28,7 @@ const hygeneSchdule: Schedule = {
     },
     {
       description: "Shower",
-      period: { start_time: "16:00", end_time: "16:30" },
+      period: { start_time: "18:00", end_time: "18:30" },
       routine: "ON_WEEKDAYS",
     },
   ],
@@ -39,17 +40,22 @@ const workSchdule: Schedule = {
   events: [
     {
       description: "Sesh1",
-      period: { start_time: "06:30", end_time: "9:30" },
+      period: { start_time: "07:30", end_time: "9:30" },
       routine: "ON_WEEKDAYS",
     },
     {
       description: "Sesh2",
-      period: { start_time: "11:00", end_time: "14:00" },
+      period: { start_time: "11:00", end_time: "13:00" },
       routine: "ON_WEEKDAYS",
     },
     {
       description: "Sesh3",
-      period: { start_time: "16:30", end_time: "19:30" },
+      period: { start_time: "14:00", end_time: "17:00" },
+      routine: "ON_WEEKDAYS",
+    },
+    {
+      description: "Sesh4",
+      period: { start_time: "19:00", end_time: "20:30" },
       routine: "ON_WEEKDAYS",
     },
   ],
@@ -77,13 +83,7 @@ const recreactionSchedule: Schedule = {
   name: "Recreaction",
   color: colours.green,
 
-  events: [
-    {
-      description: "Movie - Chef",
-      period: { start_time: "20:30", end_time: "23:00" },
-      routine: "ON_WEEKDAYS",
-    },
-  ],
+  events: [],
 };
 
 const dietSchedule: Schedule = {
@@ -103,12 +103,12 @@ const dietSchedule: Schedule = {
     },
     {
       description: "Lunch - MEAT",
-      period: { start_time: "15:00", end_time: "16:00" },
+      period: { start_time: "13:00", end_time: "14:00" },
       routine: "EVERYDAY",
     },
     {
       description: "Snack",
-      period: { start_time: "14:00", end_time: "14:10" },
+      period: { start_time: "17:00", end_time: "17:10" },
       routine: "EVERYDAY",
     },
     {
