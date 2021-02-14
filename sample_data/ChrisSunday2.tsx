@@ -1,5 +1,6 @@
 import { colours } from "../colours";
 import { Schedule, UserDataInterface } from "./sample_data_types";
+import { HomePullupDay } from "./Workouts/ChinUps";
 import { HomeHandstandDay } from "./Workouts/Handstand";
 import { MakeWorkout } from "./Workouts/MakeWorkout";
 import { HomePushupDay } from "./Workouts/PushUps";
@@ -13,7 +14,7 @@ const workoutSchdule: Schedule = {
       period: { start_time: "9:30", end_time: "10:00" },
       routine: "EVERYDAY",
     },
-    ...MakeWorkout(HomeHandstandDay, "17:00:00"),
+    ...MakeWorkout(HomePullupDay, "21:28:00"),
   ],
 };
 

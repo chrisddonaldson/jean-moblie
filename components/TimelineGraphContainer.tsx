@@ -24,12 +24,12 @@ export const TimelineGraphContainer = ({
 }: TimelineGraphContainerInterface) => {
   // let yScale = 1;
   let [eventsByDepth, setEventsByDepth] = useState<EventByDepth[]>();
+  let [currentScroll, setCurrentScroll] = useState(0);
 
   // @TODO
   useEffect(() => {
     setEventsByDepth(EventsByDetph(schedules));
   }, [schedules]);
-
   return (
     <Container>
       <Header style={[colours.shadowStyle, { zIndex: 3 }]}>
@@ -39,9 +39,14 @@ export const TimelineGraphContainer = ({
       <Body>
         <BodyScroll
           showsVerticalScrollIndicator={false}
+          onScroll={event => { 
+            setCurrentScroll(event.nativeEvent.contentOffset.y)
+          }}
+          scrollEventThrottle={16}
           contentContainerStyle={{
             width: "100%",
             position: "absolute",
+            
           }}
         >
           <View
@@ -49,6 +54,7 @@ export const TimelineGraphContainer = ({
               flexDirection: "row",
               alignItems: "stretch",
               borderWidth: 1,
+              height: "auto"
             }}
           >
             <EventsCol style={[colours.shadowStyle, { elevation: 12 }]}>
@@ -95,6 +101,7 @@ const Body = styled.View`
   flex-direction: row;
   display: flex;
   flex: 1;
+
 `;
 const BodyScroll = styled.ScrollView`
   /* position: relative; */

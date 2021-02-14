@@ -40,8 +40,7 @@ export function TimelineGraph({
 function EventBox({ e, color, yScale, maxWidth }: EventBoxInterface) {
   let top = 0;
   if ("start_time" in e.period) {
-    top = TimeToHours(e.period.start_time) * yScale;
-    // console.log(top);
+    top = TimeToHours(e.period.start_time) * yScale;;
   }
   return (
     <Spacer top={top}>

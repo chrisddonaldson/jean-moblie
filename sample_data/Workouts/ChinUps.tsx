@@ -85,7 +85,7 @@ export function makeWorkout(exercise: Exercise[]) {
   const rest = 60;
   let results = [];
   const startTimeInSecs = +TimeToSecs(startTime);
-  console.log(startTimeInSecs);
+
   let setCount = 0;
   exercise.map((v, i) => {
     //The first one is going to be
@@ -98,6 +98,6 @@ export function makeWorkout(exercise: Exercise[]) {
       setCount++;
     }
   });
-  console.log(results);
+
   return results;
 }

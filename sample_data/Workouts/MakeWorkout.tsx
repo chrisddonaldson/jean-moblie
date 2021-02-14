@@ -11,7 +11,7 @@ export function MakeWorkout(exercise: Exercise[], startTime: string) {
   const rest = 60;
   let results: event[] = [];
   const startTimeInSecs = +TimeToSecs(startTime);
-  console.log(startTimeInSecs);
+
   let setCount = 0;
   exercise.map((v, i) => {
     //The first one is going to be
@@ -30,6 +30,6 @@ export function MakeWorkout(exercise: Exercise[], startTime: string) {
       setCount++;
     }
   });
-  console.log(results);
+
   return results;
 }

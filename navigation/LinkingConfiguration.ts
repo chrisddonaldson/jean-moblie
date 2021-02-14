@@ -9,6 +9,7 @@ export default {
         Register: "register",
         Dashboard: "dashboard",
         Tabata: "tabata",
+        Food: "food",
       },
     },
   },

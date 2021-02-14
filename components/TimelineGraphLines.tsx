@@ -16,13 +16,13 @@ export function TimelineGraphLines({
   eventByDepth,
   yScale,
 }: TimelineGraphLinesInterface) {
-  // console.log(eventByDepth);
+
 
   return (
     // acts as the fixed pinboard
     <View
       style={{
-        position: "absolute",
+        // position: "absolute",
         display: "flex",
         flexDirection: "row",
         width: "100%",
@@ -62,7 +62,7 @@ function EventLine({ e, color, yScale }: EventLineInterface) {
   if ("start_time" in e.period) {
     top = TimeToHours(e.period.start_time) * yScale;
     height = TimeToHours(e.period.end_time) * yScale - top;
-    // console.log(top);
+
   }
   return (
     <Spacer top={top}>

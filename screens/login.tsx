@@ -2,76 +2,106 @@ import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text } from "../components/Themed";
+
 import Logo from "../components/Logo";
 import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import styled from "styled-components/native";
 
-const login = async () => {
-  const config = {
-    url: "https://api.jeanbeta.com/auth",
-    realm: "jean-app",
-    clientId: "jean-app-code-flow-client",
-    redirectUri: "http://localhost:19006/success.html",
-    appsiteUri: "https://<APPSITE HOST>/app.html",
-    // kcIdpHint: "facebook", // *optional*
-  };
 
-  Login.startLoginProcess(config).then((tokens: any) => {
-    console.log(tokens);
-  });
-};
-
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({navigation}) {
   const [text, setText] = useState("");
 
   return (
-    <BackgroundEnvironment style={styles.container}>
+    <BackgroundEnvironment style={{
+      flex: 1, 
+      dispaly:"flex",
+      alignItems: "stretch",
+      justifyContent: "center"
+    }}>
       <Logo />
-      <View style={styles.middleContainer}>
-        <Text style={styles.title}>Sign in</Text>
+      <LoginContainer >
+      <H1>Sign in</H1>
+        <LabelTextBoxContainer>
+ 
 
-        <Text>Username</Text>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            minWidth: 200,
-          }}
+        <FieldLabel>Username</FieldLabel>
+        <StyledTextBox
+        
           onChangeText={(value) => setText(value)}
           value={text}
         />
-        <Text>Password</Text>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            minWidth: 200,
-          }}
+      
+        </LabelTextBoxContainer>
+        <LabelTextBoxContainer>
+        <FieldLabel>Password</FieldLabel>
+        <StyledTextBox
+         
           onChangeText={(value) => setText(value)}
           value={text}
         />
-        <Button
+          </LabelTextBoxContainer>
+        <PrimaryButton
           onPress={() => navigation.navigate("Dashboard")}
           title="To Dashboard"
         />
-        <Button
+        <PrimaryButton
           onPress={() => navigation.navigate("Register")}
           title="New account"
         />
-      </View>
+      </LoginContainer>
     </BackgroundEnvironment>
   );
 }
 
+const PrimaryButton = styled.Button`
+margin-top: 8px;
+margin-bottom: 13px;
+`
+
+const LabelTextBoxContainer = styled.View`
+padding-top: 8px;
+
+`
+const H1 =styled.Text`
+padding-bottom:8px;
+font-size: 32px;
+color: white;
+`
+const FieldLabel =styled.Text`
+
+color: white;
+`
+
+const LoginContainer = styled.View`
+   flex: 1;
+
+   max-width: 200px;
+    align-items: stretch;
+    justify-content: center;
+    padding-left: 16px;
+    padding-right: 16px;
+`
+
+const StyledTextBox = styled.TextInput`
+
+border-radius:8px;
+padding-left: 16px;
+padding-right: 16px;
+text-align: center;
+padding-top: 4px;
+padding-bottom: 4px;
+background-color: white;
+`
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
+
+  textBox: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    minWidth: 200,
   },
+
 
   middleContainer: {
     flex: 1,

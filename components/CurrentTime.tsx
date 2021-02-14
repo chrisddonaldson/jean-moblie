@@ -15,19 +15,15 @@ interface CurrentTimeInterface {
 }
 
 export function CurrentTime({ yScale }: CurrentTimeInterface) {
-  // get the hours
-  // get the time
-  // time to position
   const top = 100;
   const [time, setTime] = useState(new Date());
   let timer;
   const yOffset = TimeToHours(GetCurrentTimeFromDate(time)) * yScale;
 
   useEffect(() => {
-    // set up timer
+
     let timer = setTimeout(() => {
       setTime(new Date());
-      console.log("tick");
     }, 1000);
 
     return () => {

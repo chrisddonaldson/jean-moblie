@@ -16,7 +16,7 @@ import { chrisData } from "../sample_data/ChrisSunday2";
 export default function Dashboard({ navigation }) {
   const data1 = chrisData;
   const state = useSelector((state) => state.chat);
-  console.log(state);
+
   return (
     <BackgroundEnvironment style={styles.container}>
       <Header>

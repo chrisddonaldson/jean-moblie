@@ -84,7 +84,7 @@ export function LegDayMakeWorkout(exercise: Exercise[]) {
   const rest = 60;
   let results: event[] = [];
   const startTimeInSecs = +TimeToSecs(startTime);
-  console.log(startTimeInSecs);
+
   let setCount = 0;
   exercise.map((v, i) => {
     //The first one is going to be
@@ -103,6 +103,6 @@ export function LegDayMakeWorkout(exercise: Exercise[]) {
       setCount++;
     }
   });
-  console.log(results);
+
   return results;
 }

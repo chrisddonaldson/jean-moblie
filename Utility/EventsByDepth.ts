@@ -107,8 +107,7 @@ export function EventsByDetph(schedules: Schedule[]) {
     });
     distinctGroupsWithDepth.push({ group_id: v, depth: depth });
   });
-
-  //console.log(distinctGroupsWithDepth);
+);
 
   let results: { event: EventColoured; group_id: string }[] = [];
 
@@ -127,13 +126,11 @@ export function EventsByDetph(schedules: Schedule[]) {
     });
   });
 
-  // console.log(results);
 
   distinctGroupsWithDepth.map(
     (v) => (distincGroupsAsObject[v.group_id] = { depth: v.depth, events: [] })
   );
 
-  // console.log(distincGroupsAsObject);
 
   // transform to array
 

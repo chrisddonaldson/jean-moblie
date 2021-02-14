@@ -36,7 +36,6 @@ export function Timeline({ schedules }: TimelineInterface) {
     // set up timer
     let timer = setTimeout(() => {
       setTime(new Date());
-      // console.log("tick");
     }, 1000);
 
     return () => {
@@ -55,13 +54,14 @@ export function Timeline({ schedules }: TimelineInterface) {
         </HeaderMiddle>
         <HeaderRight>
           {/* <NoteLabel>{time.getDay()}</NoteLabel> */}
+          {/* @TODO link this up */}
           <NoteLabel>{time.toDateString()}</NoteLabel>
           <NoteLabel>Earlsfield</NoteLabel>
           <NoteLabel>17degs</NoteLabel>
         </HeaderRight>
       </Header>
       <Body>
-        <TimelineGraphContainer schedules={schedules} yScale={scale} />
+        {/* <TimelineGraphContainer schedules={schedules} yScale={scale} /> */}
       </Body>
       <Footer
         style={{

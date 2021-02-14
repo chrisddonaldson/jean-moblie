@@ -57,7 +57,7 @@ export default function RegisterScreen({ navigation }) {
       />
       <Button
         onPress={() => {
-          console.log("Register");
+      
         }}
         title="Register"
       />
