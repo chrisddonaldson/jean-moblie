@@ -14,7 +14,7 @@ const workoutSchdule: Schedule = {
       period: { start_time: "9:30", end_time: "10:00" },
       routine: "EVERYDAY",
     },
-    ...MakeWorkout(HomePullupDay, "21:28:00"),
+    ...MakeWorkout(HomePushupDay, "7:55:00"),
   ],
 };
 
@@ -39,11 +39,11 @@ const workSchdule: Schedule = {
   name: "work",
   color: colours.green,
   events: [
-    {
-      description: "Sesh1",
-      period: { start_time: "07:30", end_time: "9:30" },
-      routine: "ON_WEEKDAYS",
-    },
+    // {
+    //   description: "Sesh1",
+    //   period: { start_time: "07:30", end_time: "9:30" },
+    //   routine: "ON_WEEKDAYS",
+    // },
     {
       description: "Sesh2",
       period: { start_time: "11:00", end_time: "13:00" },

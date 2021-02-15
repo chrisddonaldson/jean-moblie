@@ -8,6 +8,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 import Dashboard from "../screens/Dashboard";
 import TabataScreen from "../screens/Tabata";
 import Food from "../screens/Food";
+import Workouts from "../screens/Workouts";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,7 @@ export default function DrawerNavigation() {
       <Drawer.Screen name="Dashboard" component={Dashboard} />
       <Drawer.Screen name="Tabata" component={TabataScreen} />
       <Drawer.Screen name="Food" component={Food} />
+      <Drawer.Screen name="Workouts" component={Workouts} />
     </Drawer.Navigator>
   );
 }

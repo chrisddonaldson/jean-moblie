@@ -30,6 +30,8 @@ export const TimelineGraphContainer = ({
   useEffect(() => {
     setEventsByDepth(EventsByDetph(schedules));
   }, [schedules]);
+
+  console.log(eventsByDepth)
   return (
     <Container>
       <Header style={[colours.shadowStyle, { zIndex: 3 }]}>

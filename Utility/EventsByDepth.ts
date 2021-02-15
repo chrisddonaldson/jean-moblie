@@ -107,7 +107,7 @@ export function EventsByDetph(schedules: Schedule[]) {
     });
     distinctGroupsWithDepth.push({ group_id: v, depth: depth });
   });
-);
+
 
   let results: { event: EventColoured; group_id: string }[] = [];
 

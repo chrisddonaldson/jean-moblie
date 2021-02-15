@@ -31,13 +31,7 @@ export default function FoodForm() {
           title={"Submit"}
           />
       </View>
-    // <LinearGradient
-    //   style={style}
-    //   // Button Linear Gradient
-    //   colors={["#70f1B0", "#26ADDF"]}
-    // >
-    //   {children}
-    // </LinearGradient>
+
   );
 }
 

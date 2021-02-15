@@ -41,7 +41,7 @@ export default function Dashboard({ navigation }) {
 const Breadcrumb = styled.Text`
   font-size: 32px;
   line-height: 32px;
-  font-family: "Righteous";
+  font-family: "Righteous_400Regular";
   color: ${colours.green};
 
   margin: 8px;

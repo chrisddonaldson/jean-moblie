@@ -80,6 +80,7 @@ interface ContainerInterface {
 
 interface HeadingInterface {
   color: string;
+
 }
 
 const Spacer = styled.View<SpacerInterface>`
@@ -103,13 +104,19 @@ const Container = styled.View<ContainerInterface>`
 `;
 
 const Heading = styled.Text<HeadingInterface>`
-  font-size: 10px;
+  font-size: 24px;
+  font-family:"Righteous_400Regular";
   font-weight: bold;
   color: ${(props) => props.color};
+  /* border-width: 1px;
+  textt */
+  text-align: right;
 `;
 
 const Label = styled.Text<HeadingInterface>`
   /* font-weight: bold; */
   color: ${(props) => props.color};
+
   font-size: 10px;
+  text-align: right;
 `;

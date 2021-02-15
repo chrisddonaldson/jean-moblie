@@ -10,24 +10,7 @@ import { TabataDisplay } from "../components/tabata/tabataDisplay";
 import { Text, View } from "../components/Themed";
 import { HomePullupDay } from "../sample_data/Workouts/ChinUps";
 
-function APITest(){
-  console.log("")
-  console.log("")
-  console.log("NETWORK REQUEST")
-  fetch('http://192.168.1.113:3000/api/workout', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify( {
-      workoutName: 'Home Pullup Day',
-      timestamp: Date.now(),
-      workout: HomePullupDay
-    }),
-  }).catch(e=>{console.log(e)})
 
-}
 
 export default function Food() {
   const [value, onChangeText] = React.useState('Useless Placeholder');
@@ -39,10 +22,6 @@ export default function Food() {
       <Text>
         This is the food container
       </Text>
-      <Button
-      title={"Add Workout"} 
-      onPress={()=>{APITest()}}
-      />
 
  <FoodForm />
     </View>

@@ -61,7 +61,7 @@ export function Timeline({ schedules }: TimelineInterface) {
         </HeaderRight>
       </Header>
       <Body>
-        {/* <TimelineGraphContainer schedules={schedules} yScale={scale} /> */}
+        <TimelineGraphContainer schedules={schedules} yScale={scale} />
       </Body>
       <Footer
         style={{
@@ -87,7 +87,7 @@ export function Timeline({ schedules }: TimelineInterface) {
 }
 
 const TimeLabel = styled.Text`
-  font-family: "Righteous";
+  font-family: "Righteous_400Regular";
   color: white;
   line-height: 40px;
   font-size: 32px;
