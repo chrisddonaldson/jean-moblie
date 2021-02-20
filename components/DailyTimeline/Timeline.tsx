@@ -25,7 +25,7 @@ interface TimelineInterface {
 
  export function Timeline({ schedules }: TimelineInterface) {
   // makeWorkout(HomePullupDay);
-  const [scale, setScale] = useState(2000);
+  const [scale, setScale] = useState(100);
   let stack: event[] = [];
   schedules.forEach((v) => {
     v.events.forEach((e) => {
@@ -122,10 +122,3 @@ const Pannel = styled.View`
   display: flex;
   height: 100%;
 `;
-const Line = styled.View`
-  background-color: ${colours.darkblue};
-`;
-
-function mapSchedules(s: Schedule) {
-  return s.events.map((v) => v);
-}

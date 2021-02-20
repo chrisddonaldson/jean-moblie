@@ -43,10 +43,10 @@ function HourTicks(yScale: number) {
     ticks.push(
       <TickContainer height={yScale} key={"hour-"+i}>
         <TickContainerRow>
-          <TickText size={12} color={"blue"}>
+          <TickText size={12} color={"white"}>
             {i}
           </TickText>
-          <Tick height={3} width={"50%"} color={"blue"} />
+          <Tick height={3} width={"50%"} color={"white"} />
         </TickContainerRow>
       </TickContainer>
     );
@@ -62,10 +62,10 @@ function HalfHourTicks(yScale: number) {
         <TickContainerRow>
           {i % 2 !== 0 ? (
             <>
-              <TickText size={8} color={"yellow"}>
+              <TickText size={8} color={"white"}>
                 30
               </TickText>
-              <Tick height={2} width={"40%"} color={"yellow"} />
+              <Tick height={2} width={"40%"} color={"white"} />
             </>
           ) : null}
         </TickContainerRow>
@@ -77,16 +77,24 @@ function HalfHourTicks(yScale: number) {
 
 function QuaterHourTicks(yScale: number) {
   let ticks = [];
+  let  isPrinting = false;
+  let is15Mins = false;
   for (let i = 0; i < 96; i++) {
+    isPrinting = false;
+    if(i % 4 !== 0 && i % 2 !== 0){
+      isPrinting = true;
+      is15Mins = !is15Mins;
+    }
     ticks.push(
       <TickContainer height={yScale / 4} key={"quater-"+i}>
         <TickContainerRow>
-          {i % 4 !== 0 && i % 2 !== 0 ? (
+          {isPrinting? (
             <>
-              <TickText size={7} color={"green"}>
-                15
+              <TickText size={7} color={"white"}>
+                {is15Mins? ('15'):('45')}
+              
               </TickText>
-              <Tick height={2} width={"30%"} color={"green"} />
+              <Tick height={2} width={"30%"} color={"white"} />
             </>
           ) : null}
         </TickContainerRow>
@@ -104,7 +112,7 @@ function FiveMinTicks(yScale: number) {
         <TickContainerRow>
           {i % 12 !== 0 && i && i % 3 !== 0 ? (
             <>
-              <Tick height={2} width={"30%"} color={"red"} />
+              <Tick height={2} width={"30%"} color={"white"} />
             </>
           ) : null}
         </TickContainerRow>
@@ -122,7 +130,7 @@ function MinTicks(yScale: number) {
         <TickContainerRow>
           {i % 60 !== 0 && i % 30 !== 0 && i && i % 5 !== 0 ? (
             <>
-              <Tick height={1} width={"20%"} color={"orange"} />
+              <Tick height={1} width={"20%"} color={"white"} />
             </>
           ) : null}
         </TickContainerRow>
@@ -139,8 +147,13 @@ function TickFactoryD({ yScale }: TickFactoryInterface) {
   const hourTicks = true;
   const halfHourTicks = true;
   const quaterHourTicks = true;
-  const fiveMinuteTicks = true;
-  const minuteTicks = true;
+  let fiveMinuteTicks = true;
+  let minuteTicks = true;
+
+  if(yScale <300 ){
+     fiveMinuteTicks = false;
+     minuteTicks = false;
+  }
   return (
     <TickCol style={[colours.shadowStyle, { zIndex: 1 }, { elevation: 11 }]}>
       <TickColContainer>
@@ -175,9 +188,6 @@ const TickCol = styled.View`
   background-color: ${colours.darkTheme.darkmiddle};
   min-width: 20px;
   max-width: 30px;
-
-  /* height: 230px; */
-  /* overflow: hidden; */
 `;
 
 const HourLabel = styled.Text`
@@ -215,8 +225,6 @@ const SumpremeTick = styled.View`
 
 const TickColContainer = styled.View`
   position: absolute;
-  /* border: 1px solid yellow; */
-
   width: 100%;
 `;
 
@@ -226,13 +234,11 @@ interface TickContainerInterface {
 
 const TickContainer = styled.View<TickContainerInterface>`
   min-height: ${(props) => props.height}px;
-
-  /* border: 1px solid blue; */
   width: 100%;
 `;
 
 const TickContainerRow = styled.View`
-  /* border: 1px solid black; */
+
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -259,7 +265,7 @@ interface TickTextInterface {
 
 const TickText = styled.Text<TickTextInterface>`
   color: ${(props) => props.color};
-  top: ${(props) => -props.size / 2}px;
+  top: ${(props) => (-props.size / 2) -2}px;
   font-size: ${(props) => props.size}px;
   position: relative;
   padding-right: 2px;

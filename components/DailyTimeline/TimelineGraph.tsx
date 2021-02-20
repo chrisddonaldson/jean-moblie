@@ -87,7 +87,6 @@ const Spacer = styled.View<SpacerInterface>`
   top: ${(props) => props.top}px;
   padding-left: 1px;
   padding-right: 1px;
-  /* border: 1px solid blue; */
   display: flex;
   min-height: 64px;
   flex: 1;
@@ -104,19 +103,14 @@ const Container = styled.View<ContainerInterface>`
 `;
 
 const Heading = styled.Text<HeadingInterface>`
-  font-size: 24px;
+  font-size: 12px;
   font-family:"Righteous_400Regular";
-  font-weight: bold;
   color: ${(props) => props.color};
-  /* border-width: 1px;
-  textt */
   text-align: right;
 `;
 
 const Label = styled.Text<HeadingInterface>`
-  /* font-weight: bold; */
   color: ${(props) => props.color};
-
   font-size: 10px;
   text-align: right;
 `;
