@@ -6,9 +6,9 @@ import styled from "styled-components/native";
 
 import { colours } from "../colours";
 import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import { Timeline } from "../components/DailyTimeline/Timeline";
 import Logo from "../components/Logo";
 import Schedule from "../components/Schedule";
-import { Timeline } from "../components/Timeline";
 import { chatReducer } from "../redux/chat/chatReducer";
 import { brieData } from "../sample_data/brie";
 import { chrisData } from "../sample_data/ChrisSunday2";

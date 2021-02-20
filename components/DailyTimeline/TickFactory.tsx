@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { StyledComponent } from "styled-components";
 import styled from "styled-components/native";
-import { colours } from "../colours";
+import { colours } from "../../colours";
 
 interface TickFactoryInterface {
   yScale: number;
@@ -41,7 +41,7 @@ function HourTicks(yScale: number) {
   let ticks = [];
   for (let i = 0; i < 24; i++) {
     ticks.push(
-      <TickContainer height={yScale}>
+      <TickContainer height={yScale} key={"hour-"+i}>
         <TickContainerRow>
           <TickText size={12} color={"blue"}>
             {i}
@@ -58,7 +58,7 @@ function HalfHourTicks(yScale: number) {
   let ticks = [];
   for (let i = 0; i < 48; i++) {
     ticks.push(
-      <TickContainer height={yScale / 2}>
+      <TickContainer height={yScale / 2} key={"half-hour-"+i}>
         <TickContainerRow>
           {i % 2 !== 0 ? (
             <>
@@ -79,7 +79,7 @@ function QuaterHourTicks(yScale: number) {
   let ticks = [];
   for (let i = 0; i < 96; i++) {
     ticks.push(
-      <TickContainer height={yScale / 4}>
+      <TickContainer height={yScale / 4} key={"quater-"+i}>
         <TickContainerRow>
           {i % 4 !== 0 && i % 2 !== 0 ? (
             <>
@@ -100,7 +100,7 @@ function FiveMinTicks(yScale: number) {
   let ticks = [];
   for (let i = 0; i < 288; i++) {
     ticks.push(
-      <TickContainer height={yScale / 12}>
+      <TickContainer height={yScale / 12} key={"five-min-"+i}>
         <TickContainerRow>
           {i % 12 !== 0 && i && i % 3 !== 0 ? (
             <>
@@ -118,7 +118,7 @@ function MinTicks(yScale: number) {
   let ticks = [];
   for (let i = 0; i < 1440; i++) {
     ticks.push(
-      <TickContainer height={yScale / 60}>
+      <TickContainer height={yScale / 60} key={"min-"+i}>
         <TickContainerRow>
           {i % 60 !== 0 && i % 30 !== 0 && i && i % 5 !== 0 ? (
             <>

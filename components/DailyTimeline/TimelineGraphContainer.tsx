@@ -1,18 +1,21 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useMemo, useState } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import styled from "styled-components/native";
-import { colours } from "../colours";
-import { Schedule, event } from "../sample_data/sample_data_types";
-import { RandomId } from "../Utility/RandomId";
-import { TimeToMins } from "../Utility/TimeUtil";
+import { colours } from "../../colours";
+import { Schedule, event } from "../../sample_data/sample_data_types";
+import { RandomId } from "../../Utility/RandomId";
+import { TimeToMins } from "../../Utility/TimeUtil";
 import { TickFactory } from "./TickFactory";
 import { TimelineGraph } from "./TimelineGraph";
 import { TimelineGraphLines } from "./TimelineGraphLines";
 import _ from "lodash";
-import { EventsByDetph, EventByDepth } from "../Utility/EventsByDepth";
-import { CurrentTime } from "./CurrentTime";
+import { EventsByDetph, EventByDepth } from "../../Utility/EventsByDepth";
+import { CurrentTime, CurrentTimeOffsetCalc } from "./CurrentTime";
+import { useScrollToTop } from '@react-navigation/native';
+import { useSelector } from "react-redux";
+
 interface TimelineGraphContainerInterface {
   schedules: Schedule[];
   yScale: number;
@@ -22,19 +25,22 @@ export const TimelineGraphContainer = ({
   schedules,
   yScale,
 }: TimelineGraphContainerInterface) => {
-  // let yScale = 1;
-  let [eventsByDepth, setEventsByDepth] = useState<EventByDepth[]>();
   let [currentScroll, setCurrentScroll] = useState(0);
+  const eventsByDepth = useMemo(() =>     EventsByDetph(schedules),[schedules]);
+  useEffect(()=>{console.log(eventsByDepth)},[eventsByDepth])
+  const scrollRef = React.useRef();
+  const time = useSelector(state => state.chat.time)
+  useEffect(()=>{scrollRef.current?.scrollTo({
+    y: CurrentTimeOffsetCalc(time, yScale)-200,
+    animated: true,
+});},[time])
 
-  // @TODO
-  useEffect(() => {
-    setEventsByDepth(EventsByDetph(schedules));
-  }, [schedules]);
 
-  console.log(eventsByDepth)
+  
+
   return (
     <Container>
-      <Header style={[colours.shadowStyle, { zIndex: 3 }]}>
+      <Header style={[colours.shadowStyle, { zIndex: 3 }]} >
         <Dot />
         <Text style={{ color: "white" }}>Chris</Text>
       </Header>
@@ -44,6 +50,7 @@ export const TimelineGraphContainer = ({
           onScroll={event => { 
             setCurrentScroll(event.nativeEvent.contentOffset.y)
           }}
+          ref={scrollRef}
           scrollEventThrottle={16}
           contentContainerStyle={{
             width: "100%",

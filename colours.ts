@@ -3,6 +3,7 @@ export const colours = {
   red: "#FE4444",
   purpule: "#A59FF8",
   yellow: "#F3DC65",
+  darkYellow:'#A7922B',
   blue: "#324AB2",
   teal: "#2EFFDB",
   darkblue: "#39353B",
@@ -13,6 +14,7 @@ export const colours = {
     middle: "#404150",
     darkmiddle: "#40495A",
     dark: "#272840",
+    
   },
   shadowStyle: {
     shadowColor: "#000",

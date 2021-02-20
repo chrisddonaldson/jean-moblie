@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
 import styled from "styled-components/native";
-import { colours } from "../colours";
-import { Schedule, event } from "../sample_data/sample_data_types";
-import { EventByDepth } from "../Utility/EventsByDepth";
-import { FormatLength } from "../Utility/FormatLength";
-import { TimeToHours, TimeToMins } from "../Utility/TimeUtil";
+import { colours } from "../../colours";
+import { Schedule, event } from "../../sample_data/sample_data_types";
+import { EventByDepth } from "../../Utility/EventsByDepth";
+import { FormatLength } from "../../Utility/FormatLength";
+import { TimeToHours, TimeToMins } from "../../Utility/TimeUtil";
 
 interface TimelineGraphLinesInterface {
   eventByDepth: EventByDepth;
@@ -17,16 +17,16 @@ export function TimelineGraphLines({
   yScale,
 }: TimelineGraphLinesInterface) {
 
-
+  // console.log(eventByDepth)
   return (
     // acts as the fixed pinboard
     <View
       style={{
-        // position: "absolute",
+        position: "absolute",
         display: "flex",
         flexDirection: "row",
         width: "100%",
-        height: "100%",
+        // height: "100%",
         paddingLeft: 8,
       }}
     >

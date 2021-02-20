@@ -3,33 +3,30 @@ import { View } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import styled from "styled-components/native";
-import { TimeToHours, TimeToMins } from "../Utility/TimeUtil";
+import { TimeToHours, TimeToMins } from "../../Utility/TimeUtil";
 import {
   GetCurrentTime,
   GetCurrentTimeFromDate,
-} from "../Utility/GetCurrentTime";
-import { colours } from "../colours";
+} from "../../Utility/GetCurrentTime";
+import { colours } from "../../colours";
+import { useSelector } from "react-redux";
 
 interface CurrentTimeInterface {
   yScale: number;
 }
 
+export function CurrentTimeOffsetCalc(time:Date,yScale:number){
+return TimeToHours(GetCurrentTimeFromDate(time)) * yScale;
+}
+
 export function CurrentTime({ yScale }: CurrentTimeInterface) {
   const top = 100;
-  const [time, setTime] = useState(new Date());
+  // const [time, setTime] = useState(new Date());
   let timer;
-  const yOffset = TimeToHours(GetCurrentTimeFromDate(time)) * yScale;
-
-  useEffect(() => {
-
-    let timer = setTimeout(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [time]);
+  
+  const time = useSelector(state => state.chat.time)
+  // console.log(time)
+  const yOffset = CurrentTimeOffsetCalc(time,yScale)
 
   return (
     <Line
@@ -42,7 +39,6 @@ export function CurrentTime({ yScale }: CurrentTimeInterface) {
         },
         shadowOpacity: 1,
         shadowRadius: 20,
-
         elevation: 2,
       }}
     ></Line>

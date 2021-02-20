@@ -6,10 +6,26 @@ import { Button, StyleSheet, TextInput, View } from "react-native";
 import Logo from "../components/Logo";
 import BackgroundEnvironment from "../components/BackgroundEnvironment";
 import styled from "styled-components/native";
+import { apiUrl } from "../Utility/Environment";
 
 
 export default function LoginScreen({navigation}) {
   const [text, setText] = useState("");
+  React.useEffect(()=>{
+    console.log(apiUrl + '/api/workouts')
+    fetch(apiUrl + '/api/workouts', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(resp=>resp.json()).then(json =>
+    console.log(json)
+    )
+    
+  .catch(e=>{console.log(e)})
+ },[])
+
 
   return (
     <BackgroundEnvironment style={{
