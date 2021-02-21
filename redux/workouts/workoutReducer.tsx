@@ -15,7 +15,8 @@ export function workoutReducer(
   switch (action.type) {
 
       case GET_WORKOUTS:
-        
+
+      
         console.log(action)
         return {
         ...state,
