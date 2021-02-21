@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as React from "react";
 import { Button, StyleSheet } from "react-native";
+import { BackgroundEnvironment } from "../components/BackgroundEnvironment";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import FoodForm from "../components/food/FoodForm";
@@ -12,12 +13,13 @@ import { HomePullupDay } from "../sample_data/Workouts/ChinUps";
 
 
 
-export default function Food() {
+export default function Food({navigation}) {
   const [value, onChangeText] = React.useState('Useless Placeholder');
 
 
 
   return (
+    <BackgroundEnvironment navigation={navigation} breadcrumb="Food">
     <View style={styles.container}>
       <Text>
         This is the food container
@@ -25,6 +27,7 @@ export default function Food() {
 
  <FoodForm />
     </View>
+    </BackgroundEnvironment>
   );
 }
 

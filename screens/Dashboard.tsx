@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components/native";
 
 import { colours } from "../colours";
-import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 import { Timeline } from "../components/DailyTimeline/Timeline";
 import Logo from "../components/Logo";
 import Schedule from "../components/Schedule";
@@ -15,22 +15,11 @@ import { chrisData } from "../sample_data/ChrisSunday2";
 
 export default function Dashboard({ navigation }) {
   const data1 = chrisData;
-  const state = useSelector((state) => state.chat);
+  // const state = useSelector((state) => state.chat);
 
   return (
-    <BackgroundEnvironment style={styles.container}>
-      <Header>
-        <LeftContainer>
-          <LogoBox>
-            <Logo />
-          </LogoBox>
-          <View style={{ justifyContent: "flex-end" }}>
-            <Breadcrumb>Dashboard</Breadcrumb>
-          </View>
-        </LeftContainer>
-
-        <Button onPress={() => navigation.openDrawer()} title="Nav" />
-      </Header>
+    <BackgroundEnvironment navigation={navigation} breadcrumb={"Dashboard"}>
+     
       <Body>
         <Timeline schedules={chrisData.schedules} />
       </Body>
@@ -38,28 +27,7 @@ export default function Dashboard({ navigation }) {
   );
 }
 
-const Breadcrumb = styled.Text`
-  font-size: 32px;
-  line-height: 32px;
-  font-family: "Righteous_400Regular";
-  color: ${colours.green};
 
-  margin: 8px;
-`;
-
-const LeftContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-`;
-
-const LogoBox = styled.View`
-  background-color: ${colours.darkTheme.light};
-  padding-left: 16px;
-  height: 100%;
-  padding-right: 16px;
-  justify-content: center;
-`;
 
 const Body = styled.View`
   /* border: 1px solid red; */
@@ -70,38 +38,6 @@ const Body = styled.View`
   flex-direction: row;
   margin: 8px;
   display: flex;
-`;
-const StatsBox = styled.View`
-  /* border: 1px solid black; */
-  padding: 8px;
-  width: auto;
-  background-color: ${colours.darkblue};
-  border-radius: 8px;
-`;
-
-const H1Text = styled.Text`
-  color: white;
-`;
-const Stat = styled.Text`
-  color: white;
-  text-transform: capitalize;
-`;
-
-const ColHeading = styled.Text`
-  color: ${colours.darkblue};
-  text-transform: capitalize;
-  font-size: 18px;
-  font-weight: bold;
-`;
-const Header = styled.View`
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  max-height: 64px;
-  background-color: ${colours.darkblue};
-  justify-content: space-between;
-
-  padding-right: 16px;
 `;
 
 const styles = StyleSheet.create({

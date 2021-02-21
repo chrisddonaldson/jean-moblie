@@ -4,7 +4,7 @@ import { Button, StyleSheet, TextInput, View } from "react-native";
 
 
 import Logo from "../components/Logo";
-import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 import styled from "styled-components/native";
 import { apiUrl } from "../Utility/Environment";
 
@@ -28,12 +28,7 @@ export default function LoginScreen({navigation}) {
 
 
   return (
-    <BackgroundEnvironment style={{
-      flex: 1, 
-      dispaly:"flex",
-      alignItems: "stretch",
-      justifyContent: "center"
-    }}>
+    <BackgroundEnvironment navigation={navigation} breadcrumb={"Login"}>
       <Logo />
       <LoginContainer >
       <H1>Sign in</H1>

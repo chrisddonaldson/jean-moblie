@@ -4,9 +4,9 @@ import { Button, StyleSheet, TextInput } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import Login from "react-native-login-keycloak";
+
 import navigation from "../navigation";
-import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 
 const checkIfTokensAreOnDevice = async () => {
   Login.getTokens()

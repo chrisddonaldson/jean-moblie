@@ -2,13 +2,13 @@ import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput } from "react-native";
 import { Text } from "../components/Themed";
-import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 
 export default function RegisterScreen({ navigation }) {
   const [text, setText] = useState("");
 
   return (
-    <BackgroundEnvironment style={styles.container}>
+    <BackgroundEnvironment navigation={navigation} breadcrumb={"Register"}>
       <Text style={styles.title}>New Account</Text>
 
       <Text>Username</Text>

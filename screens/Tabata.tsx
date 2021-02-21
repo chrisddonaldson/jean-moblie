@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput } from "react-native";
-import BackgroundEnvironment from "../components/BackgroundEnvironment";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { sampleDrill1 } from "../components/tabata/SampleDrills";
@@ -10,7 +10,7 @@ import { Text, View } from "../components/Themed";
 
 export default function TabataScreen({ navigation }) {
   return (
-    <BackgroundEnvironment style={styles.container}>
+    <BackgroundEnvironment navigation={navigation} breadcrumb={"tabata"}>
       <Button onPress={() => navigation.openDrawer()} title="Nav" />
       <TabataDisplay drill={sampleDrill1} />
     </BackgroundEnvironment>

@@ -2,6 +2,9 @@ import axios from "axios";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Button, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components/native";
+import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import FoodForm from "../components/food/FoodForm";
@@ -10,7 +13,9 @@ import { sampleDrill1 } from "../components/tabata/SampleDrills";
 import { TabataDisplay } from "../components/tabata/tabataDisplay";
 import { WorkoutCard } from "../components/tabata/WorkoutCard";
 import { Text, View } from "../components/Themed";
+import { getWorkouts } from "../redux/workouts/workoutActions";
 import { HomePullupDay } from "../sample_data/Workouts/ChinUps";
+import { apiUrl } from "../Utility/Environment";
 
 function AddWorkout(){
 const data =   {
@@ -20,7 +25,7 @@ const data =   {
 }
 
 console.log(JSON.stringify(data))
-  fetch('http://192.168.1.113:3000/api/workout', {
+  fetch(apiUrl+'/api/workout', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -33,31 +38,20 @@ console.log(JSON.stringify(data))
 
 }
 
-export default function Workouts() {
+export default function Workouts({navigation}) {
   const [value, onChangeText] = useState('Useless Placeholder');
-
-  const [workouts, setWorkouts] = useState([])
-
+  // const [workouts, setWorkouts] = useState([])
+const workouts = useSelector(state => state.workouts.workouts)
+// const time = useSelector(state => state.chat.time)
+const dispatch = useDispatch()
   useEffect(()=>{
-    fetch('http://192.168.1.113:3000/api/workouts', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }
-  }).then(resp=>resp.json()).then(json =>
-    setWorkouts(json)
-    )
-    
-  .catch(e=>{console.log(e)})
+    dispatch(getWorkouts)
  },[])
-// console.log(workouts)
 
   return (
-    <View style={styles.container}>
-      <Text>
-        This is the Workouts container
-      </Text>
+    <BackgroundEnvironment navigation={navigation} breadcrumb="Workouts">
+    <Container>
+      
       <Button
       title={"Add Workout"} 
       onPress={()=>{AddWorkout()}}
@@ -65,35 +59,20 @@ export default function Workouts() {
 
 
  {/* <FoodForm /> */}
- <View>
-   
-     <View>
-    { workouts.map((v)=>{
+
+    {workouts? workouts.map((v)=>{
       return <WorkoutCard workout={v} key={v._id}/>
 
-    })}
-</View>
-   
- </View>
-    </View>
+    }):(null)}
+
+    </Container>
+    </BackgroundEnvironment>
   );
 }
 
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});
+const Container = styled.View`
+flex:1
+  
+`
