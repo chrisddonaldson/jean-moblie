@@ -10,9 +10,12 @@ import Logo from "./Logo";
 interface BackgroundEnvironment {
 navigation: any
 breadcrumb: string
+hideToolbar?: boolean
 }
 
-export  const BackgroundEnvironment: FunctionComponent<BackgroundEnvironment> = ({ children, navigation,breadcrumb }) => {
+export  const BackgroundEnvironment: FunctionComponent<BackgroundEnvironment> = ({ children, navigation,breadcrumb, hideToolbar=false }) => {
+  console.log(hideToolbar)
+
   return (
     <LinearGradient
       style={{flex: 1, display: "flex" }}
@@ -20,7 +23,7 @@ export  const BackgroundEnvironment: FunctionComponent<BackgroundEnvironment> = 
       colors={["#70f1B0", "#26ADDF"]}
     >
 
-      <Header>
+      <Header hideToolbar={hideToolbar}>
         <LeftContainer>
           {/* <LogoBox>
             <Logo />
@@ -36,9 +39,9 @@ export  const BackgroundEnvironment: FunctionComponent<BackgroundEnvironment> = 
   
           </NavButton>
       </Header>
-<ChildrenContainer>
+{/* <ChildrenContainer> */}
       {children}
-      </ChildrenContainer>
+      {/* </ChildrenContainer> */}
     </LinearGradient>
   );
 }
@@ -109,14 +112,18 @@ const ColHeading = styled.Text`
   font-size: 18px;
   font-weight: bold;
 `;
-const Header = styled.View`
+interface HeaderI {
+  hideToolbar: boolean
+}
+
+const Header = styled.View<HeaderI>`
   flex: 1;
   flex-direction: row;
   align-items: center;
   max-height: 80px;
   background-color: ${colours.darkblue};
   justify-content: space-between;
-
+  display: ${props=> props.hideToolbar ? 'none': 'flex'};
 
   padding-right: 16px;
 `;

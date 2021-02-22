@@ -2,6 +2,7 @@ import { colours } from "../colours";
 import { Schedule, UserDataInterface } from "./sample_data_types";
 import { HomePullupDay } from "./Workouts/ChinUps";
 import { HomeHandstandDay } from "./Workouts/Handstand";
+import { HomeLegDay } from "./Workouts/Legs";
 import { MakeWorkout } from "./Workouts/MakeWorkout";
 import { HomePushupDay } from "./Workouts/PushUps";
 
@@ -14,7 +15,7 @@ const workoutSchdule: Schedule = {
       period: { start_time: "9:30", end_time: "10:00" },
       routine: "EVERYDAY",
     },
-    ...MakeWorkout(HomePushupDay, "7:55:00"),
+    ...MakeWorkout(HomeLegDay, "11:10:00"),
   ],
 };
 
@@ -44,11 +45,11 @@ const workSchdule: Schedule = {
     //   period: { start_time: "07:30", end_time: "9:30" },
     //   routine: "ON_WEEKDAYS",
     // },
-    {
-      description: "Sesh2",
-      period: { start_time: "11:00", end_time: "13:00" },
-      routine: "ON_WEEKDAYS",
-    },
+    // {
+    //   description: "Sesh2",
+    //   period: { start_time: "11:00", end_time: "13:00" },
+    //   routine: "ON_WEEKDAYS",
+    // },
     {
       description: "Sesh3",
       period: { start_time: "14:00", end_time: "17:00" },

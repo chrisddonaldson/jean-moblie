@@ -6,16 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/native";
 import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import FoodForm from "../components/food/FoodForm";
-import { StyledTextInput } from "../components/StyledTextInput";
-import { sampleDrill1 } from "../components/tabata/SampleDrills";
-import { TabataDisplay } from "../components/tabata/tabataDisplay";
-import { WorkoutCard } from "../components/tabata/WorkoutCard";
+
+import { WorkoutCard } from "../components/workout/WorkoutCard";
 import { Text, View } from "../components/Themed";
 import { getWorkouts } from "../redux/workouts/workoutActions";
 import { HomePullupDay } from "../sample_data/Workouts/ChinUps";
 import { apiUrl } from "../Utility/Environment";
+import { WorkoutInspector } from "../components/workout/WorkoutInspector";
 
 function AddWorkout(){
 const data =   {
@@ -41,7 +38,7 @@ console.log(JSON.stringify(data))
 export default function Workouts({navigation}) {
   const [value, onChangeText] = useState('Useless Placeholder');
   // const [workouts, setWorkouts] = useState([])
-const workouts = useSelector(state => state.workouts.workouts)
+
 // const time = useSelector(state => state.chat.time)
 const dispatch = useDispatch()
   useEffect(()=>{
@@ -52,18 +49,7 @@ const dispatch = useDispatch()
     <BackgroundEnvironment navigation={navigation} breadcrumb="Workouts">
     <Container>
       
-      <Button
-      title={"Add Workout"} 
-      onPress={()=>{AddWorkout()}}
-      />
-
-
- {/* <FoodForm /> */}
-
-    {workouts? workouts.map((v)=>{
-      return <WorkoutCard workout={v} key={v._id}/>
-
-    }):(null)}
+<WorkoutInspector/>
 
     </Container>
     </BackgroundEnvironment>

@@ -1,7 +1,10 @@
 import * as React from "react";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components/native";
 import { colours } from "../../colours";
+import { updateWorkout } from "../../redux/workouts/workoutActions";
+import { WorkoutRow } from "./WorkoutRowContainer";
 
 interface WorkoutCardI {
     workout: any;
@@ -9,7 +12,13 @@ interface WorkoutCardI {
 
 export function WorkoutCard({workout}: WorkoutCardI){
 const [open, setOpen ] = useState(false);
-
+const dispatch = useDispatch();
+function onWorkoutRowChange(update:any, dispatch: Dispatch<any>){
+   
+    // console.log(workout._id + " has had an update")
+    console.log(update)
+    dispatch(updateWorkout(update))
+}
     return(
         <WorkoutCardContainer>
             <HeadingContainer onPress={()=>{setOpen(!open)}}>
@@ -18,22 +27,19 @@ const [open, setOpen ] = useState(false);
             </Heading>
             </HeadingContainer>
 {open?(<Body>
-    <WorkoutRowContainer>
-    <Index>#</Index>
-                    <Name>Name</Name>
-                    <Reps>Reps</Reps>
-                    <Sets>Sets</Sets>
-
-    </WorkoutRowContainer>
-                {workout.workout.map((v,i)=>{
-                return<WorkoutRowContainer>
-                    <Index>{i+":"}</Index>
-                    <Name>{v.name}</Name>
-                    <Reps>{v.reps}</Reps>
-                    <Sets>{v.sets}</Sets>
-                </WorkoutRowContainer>
-                })}
-                </Body>):(null)}
+    
+    <WorkoutRowHeader>
+        <Index>#</Index>
+        <Name>Name</Name>
+        <Reps>Reps</Reps>
+        <Sets>Sets</Sets>
+    </WorkoutRowHeader>
+        {workout.workout.map((v,i)=> <WorkoutRow workout={v} key={"Workout-row-container"+i} index ={i} onWorkoutRowChange={(update)=>onWorkoutRowChange(update,dispatch)} />)}
+        </Body>
+        
+        ):(null)}
+        
+    
             
         </WorkoutCardContainer>
     
@@ -47,12 +53,14 @@ const Body = styled.View`
 
 const WorkoutCardContainer = styled.View`
   margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  
+  border-radius: 10px;
+  border: 1px;
+  border-color: white;
   border-radius: 10px;
   overflow: hidden;
 `
-const WorkoutRowContainer = styled.View`
+const WorkoutRowHeader = styled.View`
     /* background-color: white; */
                 display:flex;
                 flex-direction: row;

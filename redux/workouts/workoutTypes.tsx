@@ -1,8 +1,6 @@
 // src/store/chat/types.ts
 
-export interface Workout {
-    
-  }
+
   
   export interface WorkoutState {
     workouts: any[];
@@ -11,13 +9,18 @@ export interface Workout {
   
   // src/store/chat/types.ts
   export const GET_WORKOUTS = "GET_WORKOUTS";
+  export const UPDATE_WORKOUT = "UPDATE_WORKOUT";
 
   
-  interface GetWorkoutAction {
+interface GetWorkoutAction {
     type: typeof GET_WORKOUTS;
     payload: any;
   }
- 
+   
+interface UpdateWorkoutAction {
+  type: typeof UPDATE_WORKOUT;
+  payload: any;
+}
   
-  export type WorkoutActionTypes =GetWorkoutAction;
+  export type WorkoutActionTypes =GetWorkoutAction |UpdateWorkoutAction;
   

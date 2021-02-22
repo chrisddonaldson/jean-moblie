@@ -7,6 +7,8 @@ import Logo from "../components/Logo";
 import {BackgroundEnvironment} from "../components/BackgroundEnvironment";
 import styled from "styled-components/native";
 import { apiUrl } from "../Utility/Environment";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/user/userActions";
 
 
 export default function LoginScreen({navigation}) {
@@ -25,40 +27,24 @@ export default function LoginScreen({navigation}) {
     
   .catch(e=>{console.log(e)})
  },[])
-
+ const dispatch = useDispatch();
 
   return (
-    <BackgroundEnvironment navigation={navigation} breadcrumb={"Login"}>
-      <Logo />
+    <BackgroundEnvironment navigation={navigation} breadcrumb={"Login"} hideToolbar>
+      {/* <Logo /> */}
       <LoginContainer >
       <H1>Sign in</H1>
         <LabelTextBoxContainer>
- 
-
-        <FieldLabel>Username</FieldLabel>
-        <StyledTextBox
-        
-          onChangeText={(value) => setText(value)}
-          value={text}
+        <PrimaryButton
+          onPress={() => {navigation.navigate("Dashboard"); dispatch(setUser("chris")) }}
+          title="Sample User - Chris"
         />
-      
-        </LabelTextBoxContainer>
-        <LabelTextBoxContainer>
-        <FieldLabel>Password</FieldLabel>
-        <StyledTextBox
-         
-          onChangeText={(value) => setText(value)}
-          value={text}
+        <PrimaryButton
+          onPress={() => {navigation.navigate("Dashboard"); dispatch(setUser("brie")) }}
+          title="Sample User - Brie"
         />
           </LabelTextBoxContainer>
-        <PrimaryButton
-          onPress={() => navigation.navigate("Dashboard")}
-          title="To Dashboard"
-        />
-        <PrimaryButton
-          onPress={() => navigation.navigate("Register")}
-          title="New account"
-        />
+
       </LoginContainer>
     </BackgroundEnvironment>
   );

@@ -1,15 +1,14 @@
 // src/store/chat/reducers.ts
 
 
-import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { GET_WORKOUTS, WorkoutActionTypes, WorkoutState } from "./workoutTypes";
+import { GET_WORKOUTS, UPDATE_WORKOUT, WorkoutActionTypes, WorkoutState } from "./workoutTypes";
 
 const initialState: WorkoutState = {
-  workouts: []
+      workouts: []
 };
 
 export function workoutReducer(
-  state = initialState,
+      state = initialState,
   action: WorkoutActionTypes
 ): WorkoutState {
   switch (action.type) {
@@ -22,7 +21,16 @@ export function workoutReducer(
         ...state,
         workouts: action.payload
         };
- 
+        
+        case UPDATE_WORKOUT:
+
+       
+          console.log("REDUCER")
+          console.log(action)
+          console.log(state.workouts)
+          return{
+            ...state
+          }
     default:
       return state;
   }

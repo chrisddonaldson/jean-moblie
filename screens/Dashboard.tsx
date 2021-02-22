@@ -14,12 +14,12 @@ import { brieData } from "../sample_data/brie";
 import { chrisData } from "../sample_data/ChrisSunday2";
 
 export default function Dashboard({ navigation }) {
-  const data1 = chrisData;
+  // const data1 = chrisData;
   // const state = useSelector((state) => state.chat);
-
+  const user = useSelector(state=> state.user)
   return (
     <BackgroundEnvironment navigation={navigation} breadcrumb={"Dashboard"}>
-     
+      
       <Body>
         <Timeline schedules={chrisData.schedules} />
       </Body>
@@ -39,20 +39,3 @@ const Body = styled.View`
   margin: 8px;
   display: flex;
 `;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "flex-start",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});
